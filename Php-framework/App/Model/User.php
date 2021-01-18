@@ -43,10 +43,8 @@ class User extends Model
         }
         return new User (
             $response[0]['email'],
-            $response[0]['lastname'],
-            $response[0]['firstname'],
+            $response[0]['username'],
             $response[0]['profilePicture'],
-            $response[0]['active'],
             $response[0]['id']
         );
     }
@@ -88,10 +86,8 @@ class User extends Model
         return new User (
 
             $response[0]['email'],
-            $response[0]['lastname'],
-            $response[0]['firstname'],
+            $response[0]['username'],
             $response[0]['profilePicture'],
-            $response[0]['active'],
             $response[0]['id']
         );
     }

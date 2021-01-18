@@ -19,7 +19,6 @@ class Post extends Model {
     protected $loveCounter;
     protected $cuteCounter;
     protected $stylishCounter;
-    protected $myTags;
     
 
     function __construct($id_post, $text, $picture, $swagCounter, $loveCounter, $cuteCounter, $stylishCounter,$tags)
@@ -82,7 +81,10 @@ class Post extends Model {
                                                              `cuteCounter`,
                                                              `stylishCounter`)
                                         VALUES ( ? , ?, ? , ? , ? ,?)');
-        $request_newpost->execute ()                
+        $request_newpost->execute ([$id_post, $text, $picture, $swagCounter, $loveCounter, $cuteCounter, $stylishCounter]);
+
+        return $DB->lastInsertId();
+
     }
 
     public static function getPost($id_post)
@@ -111,30 +113,77 @@ class Post extends Model {
         );
     }
 
-    public static function searchPost($tag)
+    public static function searchPostByTag($tag)
     {
         $DB = static::DBConnect();
 
-        $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` = ? ');
+        $request_tag = $DB->prepare('SELECT * FROM `tagged` WHERE `tag` = ? ');
         $request_tag->execute([$tag]);
-        $response = $DB->fetchaAll();
+        $response = $request_tag->fetchaAll();
 
         if(sizeof($response) == 0)
         {
             return false;
         }
 
-        return new Post (
-            $response[0]['id_post'];
-            $response[0]['text'];
-            $response[0]['picture'];
-            $response[0]['swagCounter'];
-            $response[0]['loveCounter'];
-            $response[0]['cuteCounter'];
-            $response[0]['stylishCounter'];
-        );
+        $listPost = [];
+
+        for($i = 0; $i < sizeof($result); ++$i)
+        {
+            array_push($listPost, new Post (
+                $response[$i]['id_post'];
+                $response[$i]['text'];
+                $response[$i]['picture'];
+                $response[$i]['swagCounter'];
+                $response[$i]['loveCounter'];
+                $response[$i]['cuteCounter'];
+                $response[$i]['stylishCounter'];
+                )         
+            )
+        }
         
     }
+
+    public static function addNewTag()
+    {
+        $DB = static::DBConnect();
+
+        $request_addtag = $DB->('INSERT INTO ')
+    }
+
+    public static function searchPostByText($text)
+    {
+        $DB = static::DBConnect();
+
+        $request_text = $DB->prepare('SELECT * FROM `post` WHERE `text` LIKE `%?%`');
+        $request_text->execute([$text]);
+
+        $response = $request_text->fetchAll();
+
+        
+
+        if(sizeof($response) == 0)
+        {
+            return false;
+        }
+
+        $listPost = [];
+
+        for($i = 0; $i < sizeof($result); ++$i)
+        {
+            array_push($listPost, new Post (
+                $response[$i]['id_post'];
+                $response[$i]['text'];
+                $response[$i]['picture'];
+                $response[$i]['swagCounter'];
+                $response[$i]['loveCounter'];
+                $response[$i]['cuteCounter'];
+                $response[$i]['stylishCounter'];
+                )         
+            )
+        }
+    }
+    
 
 
 
