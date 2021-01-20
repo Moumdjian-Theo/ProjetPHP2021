@@ -15,22 +15,22 @@ class Post extends Model {
     protected $id_post;
     protected $text;
     protected $picture;
-    protected $swagCounter;
-    protected $loveCounter;
-    protected $cuteCounter;
-    protected $stylishCounter;
+    protected $swagList = [];
+    protected $loveList = [];
+    protected $cuteList = [];
+    protected $stylishList = [];
+    protected $myTags = [];
     
 
-    function __construct($id_post, $text, $picture, $swagCounter, $loveCounter, $cuteCounter, $stylishCounter,$tags)
+    function __construct($id_post, $text, $picture, $swagList, $loveList, $cuteList, $stylishList)
     {
         $this->id_post = $id_post;
         $this->text = $text;
         $this->picture = $picture;
-        $this->swagCounter = $swagCounter;
-        $this->loveCounter = $loveCounter;
-        $this->cuteCounter = $cuteCounter;
-        $this->stylishCounter = $stylishCounter;
-        $this->myTags = $tags;
+        $this->swagList = $swagList;
+        $this->loveList = $loveList;
+        $this->cuteList = $cuteList;
+        $this->stylishList = $stylishList;
     }
 
     public function getIdPost()
@@ -43,24 +43,136 @@ class Post extends Model {
         return $this->picture;
     }
 
-    public function getSwagCounter()
+    public function getSwagUsers($id_post)
     {
-        return $this->swagCounter;
+        $DB = static::DBConnect();
+
+        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
+                                                                                SELECT `id_user`
+                                                                                FROM `reaction`
+                                                                                WHERE `id_post` = ? AND typeR = `swag`)');
+        $request_swag->execute([$id_post]);
+        $response = $request_swag->fetchAll();
+
+        if(sizeof($response) == 0)
+        {
+            return;
+        }
+
+        $listUser = [];
+
+        for ($i = 0; i < sizeof($response); ++$i)
+        {
+            array_push($listTravel, new User (
+                    $response[$i]['email'],
+                    $response[$i]['id'],
+                    $response[$i]['username'],
+                    $response[$i]['profilePicture'],
+                    $response[$i]['role']
+            )
+            );
+        }
+
+        return $listUser;
     }
 
-    public function getLoveCounter()
+    public function getLoveUsers()
     {
-        return $this->loveCounter;
+        $DB = static::DBConnect();
+
+        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
+                                                                                SELECT `id_user`
+                                                                                FROM `reaction`
+                                                                                WHERE `id_post` = ? AND typeR = `love`)');
+        $request_swag->execute([$id_post]);
+        $response = $request_swag->fetchAll();
+
+        if(sizeof($response) == 0)
+        {
+            return;
+        }
+
+        $listUser = [];
+
+        for ($i = 0; i < sizeof($response); ++$i)
+        {
+            array_push($listTravel, new User (
+                    $response[$i]['email'],
+                    $response[$i]['id'],
+                    $response[$i]['username'],
+                    $response[$i]['profilePicture'],
+                    $response[$i]['role']
+            )
+            );
+        }
+
+        return $listUser;
     }
 
-    public function getcuteCounter()
+    public function getCuteUsers()
     {
-        return $this->stylishCounter;
+        $DB = static::DBConnect();
+
+        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
+                                                                                SELECT `id_user`
+                                                                                FROM `reaction`
+                                                                                WHERE `id_post` = ? AND typeR = `cute`)');
+        $request_cute->execute([$id_post]);
+        $response = $request_cute->fetchAll();
+
+        if(sizeof($response) == 0)
+        {
+            return;
+        }
+
+        $listUser = [];
+
+        for ($i = 0; i < sizeof($response); ++$i)
+        {
+            array_push($listTravel, new User (
+                    $response[$i]['email'],
+                    $response[$i]['id'],
+                    $response[$i]['username'],
+                    $response[$i]['profilePicture'],
+                    $response[$i]['role']
+            )
+            );
+        }
+
+        return $listUser;
     }
 
-    public function getStylishCounter()
+    public function getStylishUsers()
     {
-        return $this->stylishCounter;
+        $DB = static::DBConnect();
+
+        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
+                                                                                SELECT `id_user`
+                                                                                FROM `reaction`
+                                                                                WHERE `id_post` = ? AND typeR = `stylish`)');
+        $request_stylish->execute([$id_post]);
+        $response = $request_stylish->fetchAll();
+
+        if(sizeof($response) == 0)
+        {
+            return;
+        }
+
+        $listUser = [];
+
+        for ($i = 0; i < sizeof($response); ++$i)
+        {
+            array_push($listTravel, new User (
+                    $response[$i]['email'],
+                    $response[$i]['id'],
+                    $response[$i]['username'],
+                    $response[$i]['profilePicture'],
+                    $response[$i]['role']
+            )
+            );
+        }
+
+        return $listUser;
     }
 
     public function getText()
@@ -68,7 +180,17 @@ class Post extends Model {
         return $this->text;
     }
 
-    public static function insertNewPost($id_post, $text, $picture, $swagCounter, $loveCounter, $cuteCounter, $stylishCounter)
+    public function setTag($listTag)
+    {
+        $this->myTags = $listTags;
+    }
+
+    public function getTag()
+    {
+        return $this->myTags;
+    }
+
+    public static function insertNewPost($id_post, $text, $picture, $swagList, $loveList, $cuteList, $stylishList)
     {
         $DB = static::DBConnect();
 
@@ -76,12 +198,12 @@ class Post extends Model {
                                                              `id_post`,
                                                              `text`,
                                                              `picture`,
-                                                             `swagCounter`, 
-                                                             `loveCounter`,
-                                                             `cuteCounter`,
-                                                             `stylishCounter`)
+                                                             `swagList`, 
+                                                             `loveList`,
+                                                             `cuteList`,
+                                                             `stylishList`)
                                         VALUES ( ? , ?, ? , ? , ? ,?)');
-        $request_newpost->execute ([$id_post, $text, $picture, $swagCounter, $loveCounter, $cuteCounter, $stylishCounter]);
+        $request_newpost->execute ([$id_post, $text, $picture, $swagList, $loveList, $cuteList, $stylishList]);
 
         return $DB->lastInsertId();
 
@@ -102,13 +224,13 @@ class Post extends Model {
         }
 
         return new Post(
-               $response[0]['id_post'];
-               $response[0]['text'];
-               $response[0]['picture'];
-               $response[0]['swagCounter'];
-               $response[0]['loveCounter'];
-               $response[0]['cuteCounter'];
-               $response[0]['stylishCounter'];
+               $response[0]['id_post'],
+               $response[0]['text'],
+               $response[0]['picture'],
+               $response[0]['swagList'],
+               $response[0]['loveList'],
+               $response[0]['cuteList'],
+               $response[0]['stylishList'],
 
         );
     }
@@ -131,13 +253,13 @@ class Post extends Model {
         for($i = 0; $i < sizeof($result); ++$i)
         {
             array_push($listPost, new Post (
-                $response[$i]['id_post'];
-                $response[$i]['text'];
-                $response[$i]['picture'];
-                $response[$i]['swagCounter'];
-                $response[$i]['loveCounter'];
-                $response[$i]['cuteCounter'];
-                $response[$i]['stylishCounter'];
+                $response[$i]['id_post'],
+                $response[$i]['text'],
+                $response[$i]['picture'],
+                $response[$i]['swagList'],
+                $response[$i]['loveList'],
+                $response[$i]['cuteList'],
+                $response[$i]['stylishList'],
                 )         
             )
         }
@@ -175,14 +297,16 @@ class Post extends Model {
                 $response[$i]['id_post'];
                 $response[$i]['text'];
                 $response[$i]['picture'];
-                $response[$i]['swagCounter'];
-                $response[$i]['loveCounter'];
-                $response[$i]['cuteCounter'];
-                $response[$i]['stylishCounter'];
+                $response[$i]['swagList'];
+                $response[$i]['loveList'];
+                $response[$i]['cuteList'];
+                $response[$i]['stylishList'];
                 )         
             )
         }
     }
+
+    public static function 
     
 
 
