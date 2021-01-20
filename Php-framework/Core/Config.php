@@ -12,11 +12,11 @@ class Config {
 
     const DB_HOST = '';
 
-    const DB_NAME = '';
+    const DB_NAME = 'vanestarres3_database';
 
-    const DB_USER = '';
+    const DB_USER = '223937_root';
 
-    const DB_PWD = '';
+    const DB_PWD = 'toinouthemachine';
 
 }
 

@@ -239,7 +239,7 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_tag = $DB->prepare('SELECT * FROM `tagged` WHERE `tag` = ? ');
+        $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` = ? ');
         $request_tag->execute([$tag]);
         $response = $request_tag->fetchaAll();
 
@@ -305,10 +305,5 @@ class Post extends Model {
             )
         }
     }
-
-    public static function 
     
-
-
-
 }
