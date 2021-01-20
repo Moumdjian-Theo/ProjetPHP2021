@@ -19,6 +19,9 @@ $Router = new Router;
 /**
  *  Add your routes here
  */
+$Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@DisplayPage' ]);
+$Router->add('/projetphp2021/signup',['controller' => 'UserC@SignUp']);
+$Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
 
 /**
  * How to add a route :
