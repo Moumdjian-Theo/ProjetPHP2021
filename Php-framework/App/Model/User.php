@@ -96,7 +96,7 @@ class User extends Model
     {
         $DB = static::DBConnect();
 
-        $request_role = $DB->prepare('UPDATE `user` SET `role` = ? WHERE `id` = ? ')
+        $request_role = $DB->prepare('UPDATE `user` SET `role` = ? WHERE `id` = ? ');
         $request_role->execute([$role,$iduser]);
 
         return;
