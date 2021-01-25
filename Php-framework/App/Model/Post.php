@@ -38,6 +38,26 @@ class Post extends Model {
         return $this->id_post;
     }
 
+    public function getSwagCounter()
+    {
+        return $this->sizeof($swagList);
+    }
+
+    public function getCuteCounter()
+    {
+        return $this->sizeof($cuteList);
+    }
+
+    public function getstylishCounter()
+    {
+        return $this->sizeof($stylishList);
+    }
+
+    public function getloveCounter()
+    {
+        return $this->sizeof($loveList);
+    }
+
     public function getPicture()
     {
         return $this->picture;
@@ -142,7 +162,7 @@ class Post extends Model {
         return $listUser;
     }
 
-    public function getStylishUsers()
+    public function getStylishUsers($id_post)
     {
         $DB = static::DBConnect();
 
@@ -174,6 +194,51 @@ class Post extends Model {
 
         return $listUser;
     }
+
+    public function insertStylishUser($id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,stylish)');
+        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+
+        return;
+
+    }
+
+    public function insertCuteUser($id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,cute)');
+        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+
+        return;
+
+    }
+
+    public function insertSwagUser($id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,swag)');
+        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+
+        return;
+
+    }
+
+    public function insertLoveUser($id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,Love)');
+        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+
+        return;
+
+    }
+
 
     public function getText()
     {
