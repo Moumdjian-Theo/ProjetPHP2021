@@ -44,7 +44,6 @@ ob_start();
     <p><a class="link" href="SignUp.php">Mot de passe oublié ?</a></p>
 </main>
 
-
 <?php
 $content = ob_get_clean();
 require_once __DIR__.'/../template.php';
