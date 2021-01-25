@@ -18,6 +18,7 @@ nav{
     top: 0;
     left: 0;
     width: 100vw;
+    z-index: 99;
 }
 
 body{
@@ -109,12 +110,14 @@ nav .search-icon{
 @media (max-width: 1245px){
     nav{
         padding: 0 50px;
+        z-index: 99;
     }
 }
 
 @media (max-width: 1140px){
     nav{
         padding: 0px;
+        z-index: 99;
     }
     nav .logo{
         flex: 2;
@@ -129,11 +132,9 @@ nav .search-icon{
         height: 100%;
         padding: 10px 50px 0 50px;
         text-align: center;
-        background: #77b5fe;
+        background:  #77B5FE;
         display: inline-block;
-        transition: left 0.3s ease;
-
-        
+        transition: left 0.3s ease; 
         
     }
     nav .nav-items.active{

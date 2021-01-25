@@ -1,14 +1,5 @@
 <?php
-    /**
-     *  @title : confirmationAccount.php
-     * 
-     *  @author : Antoine DELAUNAY
-     *  @author : Mathieu LEBRUN
-     *  @author : Matthis HOULES
-     * 
-     *  @brief : confirmation account view (mail)
-     *  
-     */
+  
     
     ob_start();
 ?>

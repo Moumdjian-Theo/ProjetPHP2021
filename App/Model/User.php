@@ -12,28 +12,26 @@
 
 class User extends Model 
 {
-    protected $email;
-    protected $username;
+    
+    protected $Email;
+    protected $Pseudo;
     protected $id;
-    protected $profilepicture;
     protected $role;
 
-    function __construct($email, $username, $id, 
-    $profilepicture,$role)
+    function __construct($Email, $Pseudo, $id,$role)
     {
-        $this->email = $email;
-        $this->username = $username;
+        $this->Email = $Email;
+        $this->Pseudo = $Pseudo;
         $this->id = $id;
-        $this->profilepicture = $profilepicture;
         $this->role = $role;
     }
 
-    public static function isMailExist($mail)
+    public static function isMailExist($Email)
     {
         $DB = static::DBConnect();
 
-        $mail_request = $DB->prepare('SELECT * FROM `user` WHERE `email` = ?');
-        $mail_request->execute([$email]);
+        $mail_request = $DB->prepare('SELECT * FROM `user` WHERE `Email` = ?');
+        $mail_request->execute([$Email]);
 
         $response = $mail_request->fetchAll();
 
@@ -42,21 +40,22 @@ class User extends Model
             return false;
         }
         return new User (
-            $response[0]['email'],
-            $response[0]['username'],
-            $response[0]['profilePicture'],
-            $response[0]['id']
+
+            $response[0]['Email'],
+            $response[0]['Pseudo'],
+            $response[0]['id'],
+            $response[0]['role']
         );
     }
 
 
-    public static function insertNewUser($mail,$username,$profilepicture,$password,$role)
+    public static function insertNewUser($mail,$Pseudo,$profilepicture,$password,$role)
     {
         $DB = static::DBConnect();
 
-        $insertUser_request = $DB->prepare('INSERT INTO `user` (`email`, `username`,`password`, `profilePicture`,`role`) 
+        $insertUser_request = $DB->prepare('INSERT INTO `user` (`Email`, `Pseudo`,`password`,`role`) 
         VALUES (?, ?, ?, NULL,?)');
-        $insertUser_request->execute([$mail,$username,$password,$role]);
+        $insertUser_request->execute([$mail,$Pseudo,$password,$role]);
 
         return $DB->lastInsertId();
     }
@@ -66,7 +65,7 @@ class User extends Model
 
         $DB = static::DBConnect();
         
-        $request_user = $DB->prepare('SELECT * FROM `user` WHERE `email` = ?');
+        $request_user = $DB->prepare('SELECT * FROM `user` WHERE `Email` = ?');
         $request_user->execute([$mail]);
 
         $response = $request_user->fetchAll();
@@ -85,8 +84,8 @@ class User extends Model
 
         return new User (
 
-            $response[0]['email'],
-            $response[0]['username'],
+            $response[0]['Email'],
+            $response[0]['Pseudo'],
             $response[0]['profilePicture'],
             $response[0]['id']
         );
@@ -113,27 +112,27 @@ class User extends Model
         
     }
 
-    public function getUsername()
+    public function getPseudo()
     {
-        return $this->username;
+        return $this->Pseudo;
     }
 
-    public function setUsername($iduser, $newusername)
+    public function setPseudo($iduser, $newPseudo)
     {
         $DB = static::DBConnect();
 
-        $request_username = $DB->prepare ('UPDATE `user` SET `username` = ? WHERE `id` = ?');
-        $request_username->execute([$newusername,$iduser]);
+        $request_Pseudo = $DB->prepare ('UPDATE `user` SET `Pseudo` = ? WHERE `id` = ?');
+        $request_Pseudo->execute([$newPseudo,$iduser]);
 
         return;
     }
 
-    public function setMail ($iduser, $newemail)
+    public function setMail ($iduser, $newEmail)
     {
         $DB = static::DBConnect();
 
-        $request_username = $DB->prepare ('UPDATE `user` SET `email` = ? WHERE `id` = ?');
-        $request_username->execute([$newemail,$iduser]);
+        $request_Pseudo = $DB->prepare ('UPDATE `user` SET `Email` = ? WHERE `id` = ?');
+        $request_Pseudo->execute([$newEmail,$iduser]);
 
         return;
     }

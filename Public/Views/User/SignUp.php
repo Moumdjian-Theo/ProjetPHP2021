@@ -23,18 +23,9 @@
 
         <div class="inputContainer">
             <label for="mailInput">Adresse E-mail</label>
-            <input type="email" name="mailInput" placeholder="ex : marie.dujardin@gmail.com" id="mailInput">
+            <input type="email" name="mailInput" id="mailInput">
         </div>
 
-        <div class="inputContainer">
-            <label for="firstnameInput">Prénom</label>
-            <input type="text" name="firstnameInput" id="firstnameInput">
-        </div>
-
-        <div class="inputContainer">
-            <label for="lastnameInput">Nom</label>
-            <input type="text" name="lastnameInput" id="lastnameInput">
-        </div>
 
         <div class="inputContainer">
             <label for="passwordInput">Mot de passe</label>

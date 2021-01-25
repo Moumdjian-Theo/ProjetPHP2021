@@ -1,12 +1,12 @@
 <?php
 
-$listStyles = ['sign.css'];
-$listJS = ['sign.js'];
+$listStyles = ['sign'];
+$listJS = ['sign'];
 
 ob_start();
 
 ?>
-C:\laragon\www\ProjetPHP2021\App\Controller\UserC.php
+
 <main>
    
 
