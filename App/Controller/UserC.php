@@ -119,8 +119,6 @@ public function signUp()
         }
 
         View::render('User/SignIn', []);
-
-
     }
 
 }
