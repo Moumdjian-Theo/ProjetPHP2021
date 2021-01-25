@@ -15,7 +15,7 @@
 // require_once(__DIR__.'/../../Core/PopUp.php');
 
 // session_start ?
-// session_start();
+session_start();
 
  class TemplateC {
 

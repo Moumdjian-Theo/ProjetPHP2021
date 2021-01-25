@@ -9,7 +9,7 @@
 // require Core files
 require_once('./Core/Model.php');
 require_once('./Core/View.php');
-
+require_once('./Core/PopUp.php');
 
 // Router
 require_once('./Core/Router.php');

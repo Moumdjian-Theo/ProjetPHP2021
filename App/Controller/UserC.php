@@ -6,7 +6,7 @@ session_start();
 
 require_once __DIR__.'/../../Core/PopUp.php';
 
-require_once __DIR__.'/../Model/User.php';
+require_once (__DIR__.'/../Model/User.php');
 
 
 class UserC
@@ -35,13 +35,6 @@ public function signUp()
             }
 
 
-            // LastName & Firstname
-            if (empty($_POST['firstnameInput']) || empty($_POST['lastnameInput'])) {
-                $_SESSION['popup'] = new PopUp('error', 'Le prénom et le nom de famille doivent être renseignés');
-                header('location: /projetphp2021/SignUp');
-                exit;
-            }
-
 
             if (empty($_POST['passwordInput']) || empty($_POST['RpasswordInput']) || $_POST['passwordInput'] != $_POST['RpasswordInput']) {
                 $_SESSION['popup'] = new PopUp('error', 'Les mots de passe ne sont pas identiques.');
@@ -53,18 +46,9 @@ public function signUp()
 
 
             // insertion dans la base de données
-            $userId = User::newUser($_POST['usernameInput'], $_POST['mailInput'], $_POST['lastnameInput'], $_POST['firstnameInput'], $cryptedPwd);
+            $userId = User::registerUser($_POST['mailInput'], $cryptedPwd,$_POST['usernameInput']);
 
-            // Creation d'un code pour l'envoie du mail de confirmation
-            $code = AleatoryString();
-
-            Confirmation::setupConfirmation($code, $userId, 'account');
-
-
-            $mail = new Mail;
-            $mail->sendMail(['mail' => $_POST['mailInput'], 'name' => $_POST['firstnameInput'] . ' ' . $_POST['lastnameInput']], 'Merci de confirmer votre compte.', ['confirmationAccount', 'var' => $code]);
-
-
+            
             $_SESSION['popup'] = new PopUp('success', 'Votre compte a bien été créé, mais il n\'est pas encore actif. Pour l\'activer, veuillez vérifier vos mails.');
             header('location: /projetphp2021/SignUp');
             exit;
@@ -83,37 +67,33 @@ public function signUp()
             if (empty($_POST['mailInput']) || !filter_var($_POST['mailInput'], FILTER_VALIDATE_EMAIL)) {
 
                 $_SESSION['popup'] = new PopUp('error', 'L\'email renseigné n\'est pas valide !');
-                header('location: /PHP/connexion');
+                header('location: /projetphp2021/signin');
                 exit;
 
             }
 
             if (empty($_POST['pwdInput'])) {
                 $_SESSION['popup'] = new PopUp('error', 'Mot de passe renseigné non valide');
-                header('location: /PHP/connexion');
+                header('location: /projetphp2021/signin');
                 exit;
             }
 
 
-            $isUser = User::isUserExist($_POST['mailInput'], $_POST['pwdInput']);
+            $isUser = User::connectUser($_POST['mailInput'], $_POST['pwdInput']);
 
             if (!$isUser) {
                 $_SESSION['popup'] = new PopUp('error', 'Combinaison Email et mot de passe inconnus');
-                header('location: /PHP/connexion');
+                header('location: /projetphp2021/signin');
                 exit;
             }
 
 
-            if ($isUser->getUser_status() == 0) {
-                $_SESSION['popup'] = new PopUp('error', 'Votre compte doit être activé, veuillez regarder vos email.');
-                header('location: /PHP/connexion');
-                exit;
-            }
+            
 
             $_SESSION['user'] = $isUser;
 
             $_SESSION['popup'] = new PopUp('success', 'Vous êtes maintenant connecté');
-            header('location: /PHP/');
+            header('location: /projetphp2021/Accueil');
             exit;
 
         }

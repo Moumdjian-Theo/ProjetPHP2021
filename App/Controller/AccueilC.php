@@ -15,9 +15,10 @@
 // required models
 
 require_once __DIR__.'/../../Core/PopUp.php';
+require_once __DIR__.'/../Model/User.php';
 
 // session_start ?
-// session_start();
+ session_start();
 
  class AccueilC {
 
