@@ -32,5 +32,4 @@ $Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
 // Initialize Controller
 $Router->initialize();
 
-
 ?>
