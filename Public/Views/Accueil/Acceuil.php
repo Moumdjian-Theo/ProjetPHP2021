@@ -1,15 +1,5 @@
 <?php
 
-/**
- * 
- *  @title : 
- *  @author : Mathieu LEBRUN
- *  @author : Antoine DELAUNAY
- *  @author : Matthis HOULES
- * 
- *  @brief : 
- * 
- */
 
     $listStyles = ['CardPost'];
     $listJS = ['Acceuil'];
