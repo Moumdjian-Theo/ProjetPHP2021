@@ -21,7 +21,6 @@ require_once __DIR__.'/../../Core/PopUp.php';
 
  class AccueilC {
 
-
     /**
      *  @name : exampleMethod
      *  @param : void
