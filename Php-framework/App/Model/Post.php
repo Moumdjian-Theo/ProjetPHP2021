@@ -331,11 +331,13 @@ class Post extends Model {
         
     }
 
-    public static function addNewTag()
+    public static function addNewTag($tag)
     {
         $DB = static::DBConnect();
 
-        $request_addtag = $DB->('INSERT INTO ')
+        $request_addtag = $DB->('INSERT INTO `post` (`tag`) VALUES (?)');
+        $request_addtag->execute([$tag]);
+        return;
     }
 
     public static function searchPostByText($text)
