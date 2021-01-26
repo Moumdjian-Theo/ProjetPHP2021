@@ -8,6 +8,7 @@
 
 ?>
 
+
 <main>
 
     <form action="" method="POST">
@@ -54,7 +55,6 @@
 
     </form>
 </main>
-
 
 <?php
     $content = ob_get_clean();

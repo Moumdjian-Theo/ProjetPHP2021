@@ -50,6 +50,7 @@
         </form>
     </nav>
 
+
     <?= $content ?>
 
 </body>

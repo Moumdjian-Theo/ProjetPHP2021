@@ -23,6 +23,7 @@ $Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@DisplayPage' ])
 
 $Router->add('/projetphp2021/signup',['controller' => 'UserC@SignUp']);
 $Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
+$Router->add('/projetphp2021/editprofile',['controller' =>'UserC@EditProfile']);
 
 /**
  * How to add a route :
@@ -31,5 +32,6 @@ $Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
 
 // Initialize Controller
 $Router->initialize();
+
 
 ?>

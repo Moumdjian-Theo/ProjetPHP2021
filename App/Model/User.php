@@ -30,6 +30,46 @@ class User extends Model{
 
     }
 
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function getMail(){
+        return $this->email;
+    }
+
+    public function setMail($email){
+        $this->mail = $email;
+    }
+
+    public function getPassword(){
+        return $this->password;
+    }
+
+    public function setPassword($password){
+        $this->password = $password;
+    }
+
+    public function getPseudo(){
+        return $this->pseudo;
+    }
+
+    public function setPseudo($pseudo){
+        $this->pseudo =$pseudo;
+    }
+
+    public function getRole(){
+        return $this-> $role;
+    }
+
+    public function setRole($role){
+        $this->role = $role;
+    }
+
     
     static function isMailExist($email) {
         $DB = static::DBConnect();
@@ -76,6 +116,38 @@ class User extends Model{
 
         
     }
+
+
+    public static function updatePseudo($newPseudo,$id ) {
+        $DB = static::DBConnect();
+        $stmt = $DB->prepare('UPDATE user SET `Pseudo` = ? WHERE `id` = ?');
+        $stmt->execute([$newPseudo, $id]);
+
+        return;
+    }
+
+    public static function updateMail($newEmail, $id) {
+        $DB = static::DBConnect();
+        $stmt = $DB->prepare('UPDATE user SET `Email` = ? WHERE `id` = ?');
+        $stmt->execute([$newemail, $id]);
+
+        return;
+
+
+}
+
+public static function updatePassword($newPassword, $id) {
+    $DB = static::DBConnect();
+
+    $stmt = $DB->prepare('UPDATE `user` SET `Password` = ?  WHERE `id` = ?');
+
+    $stmt->execute([$newPassword, $id]);
+
+    return;
+}
+
+
+
 
 }
 

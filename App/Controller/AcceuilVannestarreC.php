@@ -21,6 +21,7 @@ session_start();
 
  class AccueilC {
 
+
     /**
      *  @name : exampleMethod
      *  @param : void
