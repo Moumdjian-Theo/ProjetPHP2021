@@ -98,11 +98,18 @@
         </div>
 
         <div class="maintext">
-            Votre compte a bien été créé.
+            Votre compte a bien été créé, cependant, il n'est pas encore actif. Pour l'activer, veuillez cliquer sur le lien ci-dessous.
         
         </div>
 
-    
+        <div class="buttonContainer">
+            <a href="localhost/AMOUV/validation?code=<?=$message['var']?>" class="activateAccount">Activer mon compte</a>
+        </div>
+
+
+        <div class="complMEssage">
+            Si vous n'êtes pas à l'origine de ce mail, merci de supprimer ce mail.
+        </div>
     </main>
 </body>
 </html>

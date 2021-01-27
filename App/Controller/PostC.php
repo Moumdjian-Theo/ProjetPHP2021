@@ -16,6 +16,9 @@ session_start();
 
 class PostC {
     public function CreatePost() {
+
+    if(isset($_SESSION['user']))
+    {
         if($_SESSION['user']->getRole() =='2'){
 
         
@@ -23,7 +26,7 @@ class PostC {
                 if(isset($_POST['action'])){
                     if(!empty($_POST['title']) && !empty($_POST['text'])){
                        
-                        Post::insertNewPost($_POST['title'],$_POST['text'],$_POST['img'],$_POST['tag']);
+                        Post::insertNewPost($_SESSION['user']->getId(),$_POST['title'],$_POST['img'],$_POST['text'],date("Y-m-d H:i:s"),0,0,0,0,$_POST['tag']);
 
                         $_SESSION['popup'] = new PopUp('success', 'Votre poste a bien été crée.');
                 header('location: /projetphp2021/createpost');
@@ -35,7 +38,11 @@ class PostC {
         
         
         View::render('CreatePost/CreatePost', []);
+        }
     }
+    else 
+    {
+        header('location: /projetphp2021/signin');
     }
-    
+}
 }

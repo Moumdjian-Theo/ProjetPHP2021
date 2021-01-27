@@ -19,11 +19,16 @@ $Router = new Router;
 /**
  *  Add your routes here
  */
-$Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@displayPost']);
+$Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@DisplayPage' ]);
 
 $Router->add('/projetphp2021/signup',['controller' => 'UserC@SignUp']);
 $Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
-$Router->add('/projetphp2021/editprofile',['controller' =>'UserC@EditProfile']);
+$Router->add('/projetphp2021/admin',['controller' =>'AdminC@verificateRole']);
+$Router->add('/projetphp2021/deleteuser.php',['controller' => 'AdminC@deleteUser']);
+$Router->add('/projetphp2021/edit.php',['controller' => 'AdminC@editRole']);
+$Router->add('/projetphp2021/deletepost.php',['controller' =>'AdminC@deletePost']);
+$Router->add('/projetphp2021/deconnexion',['controller' =>'UserC@deconnexion']);
+$Router->add('/projetphp2021/editprofil',['controller' =>'UserC@EditProfile']);
 $Router->add('/projetphp2021/createpost',['controller' =>'PostC@CreatePost']);
 
 
@@ -34,6 +39,5 @@ $Router->add('/projetphp2021/createpost',['controller' =>'PostC@CreatePost']);
 
 // Initialize Controller
 $Router->initialize();
-
 
 ?>

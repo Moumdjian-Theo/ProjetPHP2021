@@ -10,7 +10,7 @@
 
 class Config {
 
-    const DB_HOST = 'localhost:3306';
+    const DB_HOST = 'localhost:3308';
 
     const DB_NAME = 'vanestarre_db';
 
