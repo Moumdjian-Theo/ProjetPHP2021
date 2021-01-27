@@ -1,4 +1,0 @@
-<?php 
-
-    // laisser vide
-?>
