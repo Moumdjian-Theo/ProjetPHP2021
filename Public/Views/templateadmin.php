@@ -46,9 +46,9 @@
         <div class="cancel-icon">
             <span class="fas fa-times"></span>
         </div>
-        <form action="#">
-            <input type="search" class="search-data" placeholder="Rechercher" required>
-            <button type="submit" class="fas fa-search"></button>
+        <form method="post" action="/projetphp2021/searchpost">
+            <input type="search" name ="search-data" class="search-data" placeholder="Rechercher" required>
+            <button type="submit" name ="searchsubmit"class="fas fa-search"></button>
         </form>
     </nav>
 

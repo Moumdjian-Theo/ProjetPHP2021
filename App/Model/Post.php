@@ -224,7 +224,7 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_post = $DB->prepare('SELECT * FROM `post`');
+        $request_post = $DB->prepare('SELECT * FROM `post` ORDER BY `date` DESC');
         $request_post->execute();
 
         $response = $request_post->fetchAll();
@@ -304,7 +304,7 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_text = $DB->prepare('SELECT * FROM `post` WHERE `text` LIKE `%?%`');
+        $request_text = $DB->prepare("SELECT * FROM `post` WHERE body LIKE \"%star wars%\"");
         $request_text->execute([$text]);
 
         $response = $request_text->fetchAll();
@@ -318,7 +318,7 @@ class Post extends Model {
 
         $listPost = [];
 
-        for($i = 0; $i < sizeof($result); ++$i)
+        for($i = 0; $i < sizeof($response); ++$i)
         {
             array_push($listPost, new Post (
                 $response[$i]['id'],
@@ -335,6 +335,7 @@ class Post extends Model {
                 )         
             );
         }
+        return $listPost;
     }
 
     public static function deletePost($id_post)
