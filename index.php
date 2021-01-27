@@ -19,11 +19,13 @@ $Router = new Router;
 /**
  *  Add your routes here
  */
-$Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@DisplayPage' ]);
+$Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@displayPost']);
 
 $Router->add('/projetphp2021/signup',['controller' => 'UserC@SignUp']);
 $Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
 $Router->add('/projetphp2021/editprofile',['controller' =>'UserC@EditProfile']);
+$Router->add('/projetphp2021/createpost',['controller' =>'PostC@CreatePost']);
+
 
 /**
  * How to add a route :

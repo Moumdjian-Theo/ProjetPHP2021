@@ -16,6 +16,7 @@
 
 require_once __DIR__.'/../../Core/PopUp.php';
 require_once __DIR__.'/../Model/User.php';
+require_once __DIR__.'/../Model/Post.php';
 
 // session_start ?
  session_start();
@@ -34,7 +35,17 @@ require_once __DIR__.'/../Model/User.php';
     public function DisplayPage() {
         View::render('Accueil/Acceuil', []);
 
-    }// public function createCar()
+    }
+
+    Public function displayPost(){
+        
+        $posts = Post::getPost();
+        var_dump($posts);
+        
+        View::render('Accueil/Acceuil', []);
+    }
+    
+
 
 }
 
