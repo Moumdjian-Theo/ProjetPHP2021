@@ -9,7 +9,7 @@
 // require Core files
 require_once('./Core/Model.php');
 require_once('./Core/View.php');
-
+require_once('./Core/PopUp.php');
 
 // Router
 require_once('./Core/Router.php');
@@ -19,6 +19,14 @@ $Router = new Router;
 /**
  *  Add your routes here
  */
+$Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@DisplayPage' ]);
+
+$Router->add('/projetphp2021/signup',['controller' => 'UserC@SignUp']);
+$Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
+$Router->add('/projetphp2021/admin',['controller' =>'AdminC@verificateRole']);
+$Router->add('/projetphp2021/delete.php',['controller' => 'AdminC@deleteUser']);
+
+
 
 /**
  * How to add a route :
@@ -27,6 +35,5 @@ $Router = new Router;
 
 // Initialize Controller
 $Router->initialize();
-
 
 ?>

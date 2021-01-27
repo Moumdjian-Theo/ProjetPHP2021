@@ -159,5 +159,47 @@ class User extends Model
 
     }
 
+    static function getUsers()
+    {
+        $DB = static::DBConnect();
+        
+        $request_user = $DB->prepare('SELECT * FROM `user`');
+        $request_user->execute();
+
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0)
+        {
+            return false;
+        }
+
+        $listUser = [];
+
+        for($i = 0; $i < sizeof($response); ++$i)
+        {
+            array_push($listUser, new User(
+                $response[$i]['id'],
+                $response[$i]['Email'],
+                $response[$i]['Password'],
+                $response[$i]['Pseudo'],
+                $response[$i]['role']
+            ));
+        }
+
+        return $listUser;
+
+    }
+
+    static function deleteUser($id_user)
+    {
+        $DB = static::DBConnect();
+        
+        $request_user = $DB->prepare('DELETE FROM `user` WHERE id =?');
+        $request_user->execute([$id_user]);
+
+        return;
+    }
+
+
 
 }
