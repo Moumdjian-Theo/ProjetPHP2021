@@ -12,55 +12,106 @@ require_once(__DIR__.'/Post.php');
 
 class Post extends Model {
 
-    protected $id_post;
-    protected $text;
-    protected $picture;
-    protected $swagList = [];
-    protected $loveList = [];
-    protected $cuteList = [];
-    protected $stylishList = [];
-    protected $myTags = [];
+    private $id;
+    private $user_id;
+    private $title;
+    private $picture;
+    private $body;
+    private $date;
+    private $love= [];
+    private $cute = [];
+    private $trop_stylé= [];
+    private $swag=[];
+    
     
 
-    function __construct($id_post, $text, $picture, $swagList, $loveList, $cuteList, $stylishList)
-    {
-        $this->id_post = $id_post;
-        $this->text = $text;
+    function __construct($id,$user_id,$title,$picture, $body,$date,$love,$cute,$trop_stylé,$swag){
+        $this->id = $id;
+        $this->user_id = $user_id;
+        $this->title = $title;
         $this->picture = $picture;
-        $this->swagList = $swagList;
-        $this->loveList = $loveList;
-        $this->cuteList = $cuteList;
-        $this->stylishList = $stylishList;
+        $this->body = $body;
+        $this->date = $date;
+        $this->love = $love;
+        $this->cute = $cute;
+        $this->trop_stylé = $trop_stylé;
+        $this->swag = $swag;
+    }
+    public function getId(){
+        return $this->id;
     }
 
-    public function getIdPost()
+    public function getDate()
     {
-        return $this->id_post;
+        return $this->date;
     }
-
-    public function getSwagCounter()
-    {
-        return $this->sizeof($swagList);
-    }
-
-    public function getCuteCounter()
-    {
-        return $this->sizeof($cuteList);
-    }
-
-    public function getstylishCounter()
-    {
-        return $this->sizeof($stylishList);
-    }
-
-    public function getloveCounter()
-    {
-        return $this->sizeof($loveList);
+    
+    public function setId($id){
+        $this->id = $id;
     }
 
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+    
+    
+    public function getUser_id(){
+        return $this->user_id;
+    }
+    
+    public function setUser_id($user_id){
+        $this->user_id = $user_id;
+    }
+    
+    public function getBody(){
+        return $this->body;
+    }
+    
+    public function setBody($body){
+        $this->body = $body;
+    }
+
+    
+    public function setDATE($date){
+        $this->date = $date;
+    }
+    
+    public function getLove(){
+        return $this->love;
+    }
+    
+    public function setLove($love){
+        $this->love = $love;
+    }
+    
+    public function getCute(){
+        return $this->cute;
+    }
+    
+    public function setCute($cute){
+        $this->cute = $cute;
+    }
+    
+    public function getTrop_stylé(){
+        return $this->trop_stylé;
+    }
+    
+    public function setTrop_stylé($trop_stylé){
+        $this->trop_stylé = $trop_stylé;
+    }
+    
+    public function getSwag(){
+        return $this->swag;
+    }
+    
+    public function setSwag($swag){
+        $this->swag = $swag;
     }
 
     public function getSwagUsers($id_post)
@@ -84,11 +135,11 @@ class Post extends Model {
         for ($i = 0; i < sizeof($response); ++$i)
         {
             array_push($listTravel, new User (
-                    $response[$i]['email'],
-                    $response[$i]['id'],
-                    $response[$i]['username'],
-                    $response[$i]['profilePicture'],
-                    $response[$i]['role']
+                $response[$i]['id'],
+                $response[$i]['Email'],
+                $response[$i]['Password'],
+                $response[$i]['Pseudo'],
+                $response[$i]['role']
             )
             );
         }
@@ -117,11 +168,11 @@ class Post extends Model {
         for ($i = 0; i < sizeof($response); ++$i)
         {
             array_push($listTravel, new User (
-                    $response[$i]['email'],
-                    $response[$i]['id'],
-                    $response[$i]['username'],
-                    $response[$i]['profilePicture'],
-                    $response[$i]['role']
+                $response[$i]['id'],
+                $response[$i]['Email'],
+                $response[$i]['Password'],
+                $response[$i]['Pseudo'],
+                $response[$i]['role']
             )
             );
         }
@@ -150,11 +201,11 @@ class Post extends Model {
         for ($i = 0; i < sizeof($response); ++$i)
         {
             array_push($listTravel, new User (
-                    $response[$i]['email'],
-                    $response[$i]['id'],
-                    $response[$i]['username'],
-                    $response[$i]['profilePicture'],
-                    $response[$i]['role']
+                $response[$i]['id'],
+                $response[$i]['Email'],
+                $response[$i]['Password'],
+                $response[$i]['Pseudo'],
+                $response[$i]['role']
             )
             );
         }
@@ -183,11 +234,11 @@ class Post extends Model {
         for ($i = 0; i < sizeof($response); ++$i)
         {
             array_push($listTravel, new User (
-                    $response[$i]['email'],
-                    $response[$i]['id'],
-                    $response[$i]['username'],
-                    $response[$i]['profilePicture'],
-                    $response[$i]['role']
+                $response[$i]['id'],
+                $response[$i]['Email'],
+                $response[$i]['Password'],
+                $response[$i]['Pseudo'],
+                $response[$i]['role']
             )
             );
         }
@@ -239,12 +290,6 @@ class Post extends Model {
 
     }
 
-
-    public function getText()
-    {
-        return $this->text;
-    }
-
     public function setTag($listTag)
     {
         $this->myTags = $listTags;
@@ -255,20 +300,23 @@ class Post extends Model {
         return $this->myTags;
     }
 
-    public static function insertNewPost($id_post, $text, $picture, $swagList, $loveList, $cuteList, $stylishList)
+    public static function insertNewPost($id_post, $user_id, $title, $text, $picture, $date,$swagList, $loveList, $cuteList, $stylishList)
     {
         $DB = static::DBConnect();
 
         $request_newpost = $DB->prepare('INSERT INTO `post` (
-                                                             `id_post`,
-                                                             `text`,
+                                                             `id`,
+                                                             `user_id`,
+                                                             `title`,
                                                              `picture`,
-                                                             `swagList`, 
-                                                             `loveList`,
-                                                             `cuteList`,
-                                                             `stylishList`)
+                                                             `body`,
+                                                             `date`,
+                                                             `swag`, 
+                                                             `love`,
+                                                             `cute`,
+                                                             `trop_stylé`)
                                         VALUES ( ? , ?, ? , ? , ? ,?)');
-        $request_newpost->execute ([$id_post, $text, $picture, $swagList, $loveList, $cuteList, $stylishList]);
+        $request_newpost->execute ([$id_post,$user_id,$title,$picture, $text, $date, $swagList, $loveList, $cuteList, $stylishList]);
 
         return $DB->lastInsertId();
 
@@ -300,6 +348,40 @@ class Post extends Model {
         );
     }
 
+    
+    public static function getPosts()
+    {
+        $DB = static::DBConnect();
+
+        $request_post = $DB->prepare('SELECT * FROM `post`');
+        $request_post->execute();
+
+        $response = $request_post->fetchAll();
+
+        if(sizeof($response) == 0)
+        {
+            return false;
+        }
+
+        $listPost = [];
+
+        for($i = 0; $i < sizeof($response); ++$i)
+        {
+            array_push($listPost,new Post(
+                $response[$i]['id'],
+                $response[$i]['user_id'],
+                $response[$i]['title'],
+                $response[$i]['picture'],
+                $response[$i]['body'],
+                $response[$i]['date'],
+                $response[$i]['swag'],
+                $response[$i]['love'],
+                $response[$i]['cute'],
+                $response[$i]['trop_stylé']));
+        }
+        return $listPost;
+    }
+
     public static function searchPostByTag($tag)
     {
         $DB = static::DBConnect();
@@ -326,8 +408,10 @@ class Post extends Model {
                 $response[$i]['cuteList'],
                 $response[$i]['stylishList'],
                 )         
-            )
+            );
         }
+
+        return $listPost;
         
     }
 
@@ -335,7 +419,7 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_addtag = $DB->('INSERT INTO `post` (`tag`) VALUES (?)');
+        $request_addtag = $DB->prepare('INSERT INTO `post` (`tag`) VALUES (?)');
         $request_addtag->execute([$tag]);
         return;
     }
@@ -361,16 +445,35 @@ class Post extends Model {
         for($i = 0; $i < sizeof($result); ++$i)
         {
             array_push($listPost, new Post (
-                $response[$i]['id_post'];
-                $response[$i]['text'];
-                $response[$i]['picture'];
-                $response[$i]['swagList'];
-                $response[$i]['loveList'];
-                $response[$i]['cuteList'];
-                $response[$i]['stylishList'];
+                $response[$i]['id_post'],
+                $response[$i]['text'],
+                $response[$i]['picture'],
+                $response[$i]['swagList'],
+                $response[$i]['loveList'],
+                $response[$i]['cuteList'],
+                $response[$i]['stylishList'],
                 )         
-            )
+            );
         }
+    }
+
+    public static function deletePost($id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_post = $DB->prepare('DELETE FROM `post` WHERE `id`=?');
+        $request_post->execute([$id_post]);
+
+        return;
+    }
+
+    public static function getPostCount()
+    {
+        $DB = static::DBConnect();
+
+        $request_post = $DB->query("SELECT COUNT(*) FROM `post`");
+        $count = $request_post->fetchColumn();
+        return $count;
     }
     
 }
