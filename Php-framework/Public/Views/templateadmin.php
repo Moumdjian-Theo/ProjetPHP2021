@@ -14,6 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceuil</title>
     <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/Acceuil.css">
+    <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/popup.css">
+    <script src="/ProjetPHP2021/Public/assets/js/popup.js" defer></script>
     <script src="https://kit.fontawesome.com/b18ab37082.js" crossorigin="anonymous"></script>
     <?php foreach ($listStyles as $key => $value) { ?>
         <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/<?=$value?>.css">
@@ -32,7 +34,9 @@
         <div class="logo">Vanestarre</div>
         
         <div class="nav-items">
-            <li><a href="">Acceuil</a></li>
+            <li><a href="./Accueil">Acceuil</a></li>
+            <li><a href="./Admin">Admin</a></li>
+            <li><a href="./Deconnexion">Se déconnecter </a></li>
         </div>
         <div class="search-icon">
             <span class="fa fa-search"></span>

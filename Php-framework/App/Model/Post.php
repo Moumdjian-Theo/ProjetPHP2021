@@ -114,138 +114,12 @@ class Post extends Model {
         $this->swag = $swag;
     }
 
-
-
-    public function getSwagUsers($id_post)
-    {
-        $DB = static::DBConnect();
-
-        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
-                                                                                SELECT `id_user`
-                                                                                FROM `reaction`
-                                                                                WHERE `id_post` = ? AND typeR = `swag`)');
-        $request_swag->execute([$id_post]);
-        $response = $request_swag->fetchAll();
-
-        if(sizeof($response) == 0)
-        {
-            return;
-        }
-
-        $listUser = [];
-
-        for ($i = 0; i < sizeof($response); ++$i)
-        {
-            array_push($listTravel, new User (
-                $response[$i]['id'],
-                $response[$i]['Email'],
-                $response[$i]['Password'],
-                $response[$i]['Pseudo'],
-                $response[$i]['role']
-            )
-            );
-        }
-
-        return $listUser;
+    public function getTag(){
+        return $this->tag;
     }
-
-    public function getLoveUsers()
-    {
-        $DB = static::DBConnect();
-
-        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
-                                                                                SELECT `id_user`
-                                                                                FROM `reaction`
-                                                                                WHERE `id_post` = ? AND typeR = `love`)');
-        $request_swag->execute([$id_post]);
-        $response = $request_swag->fetchAll();
-
-        if(sizeof($response) == 0)
-        {
-            return;
-        }
-
-        $listUser = [];
-
-        for ($i = 0; i < sizeof($response); ++$i)
-        {
-            array_push($listTravel, new User (
-                $response[$i]['id'],
-                $response[$i]['Email'],
-                $response[$i]['Password'],
-                $response[$i]['Pseudo'],
-                $response[$i]['role']
-            )
-            );
-        }
-
-        return $listUser;
-    }
-
-    public function getCuteUsers()
-    {
-        $DB = static::DBConnect();
-
-        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
-                                                                                SELECT `id_user`
-                                                                                FROM `reaction`
-                                                                                WHERE `id_post` = ? AND typeR = `cute`)');
-        $request_cute->execute([$id_post]);
-        $response = $request_cute->fetchAll();
-
-        if(sizeof($response) == 0)
-        {
-            return;
-        }
-
-        $listUser = [];
-
-        for ($i = 0; i < sizeof($response); ++$i)
-        {
-            array_push($listTravel, new User (
-                $response[$i]['id'],
-                $response[$i]['Email'],
-                $response[$i]['Password'],
-                $response[$i]['Pseudo'],
-                $response[$i]['role']
-            )
-            );
-        }
-
-        return $listUser;
-    }
-
-    public function getStylishUsers($id_post)
-    {
-        $DB = static::DBConnect();
-
-        $request_swag = $DB->prepare('SELECT * FROM `user` WHERE `id_user` = (
-                                                                                SELECT `id_user`
-                                                                                FROM `reaction`
-                                                                                WHERE `id_post` = ? AND typeR = `stylish`)');
-        $request_stylish->execute([$id_post]);
-        $response = $request_stylish->fetchAll();
-
-        if(sizeof($response) == 0)
-        {
-            return;
-        }
-
-        $listUser = [];
-
-        for ($i = 0; i < sizeof($response); ++$i)
-        {
-            array_push($listTravel, new User (
-                $response[$i]['id'],
-                $response[$i]['Email'],
-                $response[$i]['Password'],
-                $response[$i]['Pseudo'],
-                $response[$i]['role']
-            )
-            );
-        }
-
-        return $listUser;
+    
+    public function setTag($tag){
+        $this->tag = $tag;
     }
 
     public function insertStylishUser($id_post)
@@ -292,17 +166,8 @@ class Post extends Model {
 
     }
 
-    public function setTag($listTag)
-    {
-        $this->myTags = $listTags;
-    }
 
-    public function getTag()
-    {
-        return $this->myTags;
-    }
-
-    public static function insertNewPost($id_post, $user_id, $title, $text, $picture, $date,$swagList, $loveList, $cuteList, $stylishList)
+    public static function insertNewPost($id_post, $user_id, $title, $text, $picture, $date,$swagList, $loveList, $cuteList, $stylishList,$tag)
     {
         $DB = static::DBConnect();
 
@@ -316,9 +181,9 @@ class Post extends Model {
                                                              `swag`, 
                                                              `love`,
                                                              `cute`,
-                                                             `trop_stylé`)
+                                                             `trop_stylé`,`tag`)
                                         VALUES ( ? , ?, ? , ? , ? ,?)');
-        $request_newpost->execute ([$id_post,$user_id,$title,$picture, $text, $date, $swagList, $loveList, $cuteList, $stylishList]);
+        $request_newpost->execute ([$id_post,$user_id,$title,$picture, $text, $date, $swagList, $loveList, $cuteList, $stylishList,$tag]);
 
         return $DB->lastInsertId();
 
@@ -328,7 +193,7 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_post = $DB->prepare('SELECT * FROM `post` WHERE `id_post` = ?');
+        $request_post = $DB->prepare('SELECT * FROM `post` WHERE `id` = ?');
         $request_post->execute([$id_post]);
 
         $response = $request_post->fetchAll();
@@ -339,13 +204,17 @@ class Post extends Model {
         }
 
         return new Post(
-               $response[0]['id_post'],
-               $response[0]['text'],
-               $response[0]['picture'],
-               $response[0]['swagList'],
-               $response[0]['loveList'],
-               $response[0]['cuteList'],
-               $response[0]['stylishList'],
+            $response[$i]['id'],
+            $response[$i]['user_id'],
+            $response[$i]['title'],
+            $response[$i]['picture'],
+            $response[$i]['body'],
+            $response[$i]['date'],
+            $response[$i]['swag'],
+            $response[$i]['love'],
+            $response[$i]['cute'],
+            $response[$i]['trop_stylé']
+            $response[$i]['tag'])
 
         );
     }
@@ -379,7 +248,8 @@ class Post extends Model {
                 $response[$i]['swag'],
                 $response[$i]['love'],
                 $response[$i]['cute'],
-                $response[$i]['trop_stylé']));
+                $response[$i]['trop_stylé']
+                $response[$i]['tag']));
         }
         return $listPost;
     }
@@ -402,14 +272,18 @@ class Post extends Model {
         for($i = 0; $i < sizeof($result); ++$i)
         {
             array_push($listPost, new Post (
-                $response[$i]['id_post'],
-                $response[$i]['text'],
+                $response[$i]['id'],
+                $response[$i]['user_id'],
+                $response[$i]['title'],
                 $response[$i]['picture'],
-                $response[$i]['swagList'],
-                $response[$i]['loveList'],
-                $response[$i]['cuteList'],
-                $response[$i]['stylishList'],
-                )         
+                $response[$i]['body'],
+                $response[$i]['date'],
+                $response[$i]['swag'],
+                $response[$i]['love'],
+                $response[$i]['cute'],
+                $response[$i]['trop_stylé']
+                $response[$i]['tag'])
+                         
             );
         }
 
@@ -447,13 +321,17 @@ class Post extends Model {
         for($i = 0; $i < sizeof($result); ++$i)
         {
             array_push($listPost, new Post (
-                $response[$i]['id_post'],
-                $response[$i]['text'],
+                $response[$i]['id'],
+                $response[$i]['user_id'],
+                $response[$i]['title'],
                 $response[$i]['picture'],
-                $response[$i]['swagList'],
-                $response[$i]['loveList'],
-                $response[$i]['cuteList'],
-                $response[$i]['stylishList'],
+                $response[$i]['body'],
+                $response[$i]['date'],
+                $response[$i]['swag'],
+                $response[$i]['love'],
+                $response[$i]['cute'],
+                $response[$i]['trop_stylé']
+                $response[$i]['tag'],
                 )         
             );
         }
