@@ -18,6 +18,7 @@
 
 
 require_once (__DIR__.'/../Model/User.php');
+require_once (__DIR__.'/../Model/Post.php');
 session_start();
 
  class AdminC {
@@ -37,8 +38,11 @@ session_start();
         {
             if($_SESSION['user']->getRole() ==  '2')
             {
-                 
-                View::render('Admin/admin',[]); 
+                $listUser = User::getUsers();
+                $listPost = Post::getPosts();
+                $countPost = Post::getPostCount();
+                $countUser = User::getUserCount();
+                View::render('Admin/admin',['userlist' => $listUser, 'postlist' => $listPost,'postcount' => $countPost,'usercount' => $countUser]); 
             }
             else
             {
@@ -78,6 +82,63 @@ session_start();
             exit;
         }
     }
+
+    public function editRole()
+    {
+
+        if(isset($_SESSION))
+        {
+            if($_SESSION['user']->getRole() ==  '2')
+            {
+                $id = $_GET['id'];
+                $role = $_POST['role'];
+                if(isset($role))
+                {
+
+                    echo " ".$role;
+                    $_SESSION['user']->editRole($id,$role);
+                    header('location: /projetphp2021/admin');
+                    exit;
+                }
+
+            }
+            else
+            {
+                header('location: /projetphp2021/accueil');
+                exit;
+            }
+        }
+        else 
+        {
+            header('location: /projetphp2021/accueil');
+            exit;
+        }
+    }
+
+    public function deletePost()
+    {
+        if(isset($_SESSION))
+        {
+            if($_SESSION['user']->getRole() ==  '2')
+            {
+                $id_post=$_GET['id'];
+                Post::deletePost($id_post);
+                header('location: /projetphp2021/admin');
+                exit;
+            }
+            else
+            {
+                header('location: /projetphp2021/accueil');
+                exit;
+            }
+        }
+        else 
+        {
+            header('location: /projetphp2021/accueil');
+        }
+    }
+
+
 
     
 

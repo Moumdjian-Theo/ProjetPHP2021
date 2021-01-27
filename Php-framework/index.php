@@ -24,8 +24,9 @@ $Router->add('/projetphp2021/accueil',['controller' => 'AccueilC@DisplayPage' ])
 $Router->add('/projetphp2021/signup',['controller' => 'UserC@SignUp']);
 $Router->add('/projetphp2021/signin',['controller' =>'UserC@SignIn']);
 $Router->add('/projetphp2021/admin',['controller' =>'AdminC@verificateRole']);
-$Router->add('/projetphp2021/delete.php',['controller' => 'AdminC@deleteUser']);
-
+$Router->add('/projetphp2021/deleteuser.php',['controller' => 'AdminC@deleteUser']);
+$Router->add('/projetphp2021/edit.php',['controller' => 'AdminC@editRole']);
+$Router->add('/projetphp2021/deletepost.php',['controller' =>'AdminC@deletePost']);
 
 
 /**
