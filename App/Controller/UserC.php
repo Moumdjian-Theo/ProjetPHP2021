@@ -114,9 +114,14 @@ public function signUp()
 
                 User::updatePseudo($_POST['newPseudo'], $_SESSION['user']->getId());
 
+                $_SESSION['user'] ->setPseudo($_POST['newPseudo']);
+
                 $_SESSION['popup'] = new PopUp('success', 'Votre pseudo a bien été modifié.');
                 header('location: /projetphp2021/editprofile');
+
+
                 exit();
+
             }
             
             
@@ -142,12 +147,16 @@ public function signUp()
 
                 if ($_POST['newPwd'] != $_POST['pwdVerif']) {
                     $_SESSION['popup'] = new PopUp('error', 'Les mots de passe ne sont pas identiques.');
+
+                    
                     header('location: /projetphp2021/editprofile');
                     exit;
                 }
 
                 $cryptedPwd = password_hash($_POST['newPwd'], PASSWORD_BCRYPT);
                 User::updatePassword($cryptedPwd, $_SESSION['user']->getId());
+
+                $_SESSION['user'] ->setPassword($cryptedPwd);
 
                 $_SESSION['popup'] = new PopUp('success', 'Le mot de passe a bien été modifié.');
                 header('location: /projetphp2021/editprofile');

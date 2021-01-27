@@ -1,35 +1,38 @@
 <?php
 
-$listStyles = ['EditProfil'];
-$listJS = ['sign'];
+$listStyles = ['createpost'];
+$listJS = [''];
 
 ob_start();
 
 ?>
 
 
+<main>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creer Post</title>
-</head>
-<body>
+<div class="MainContent">
 
 <h1>Creer un Post</h1>
 <form action="" method="post">
-    <div class="formContainer">
+    <div class="container">
         <input type="text" name="title" placeholder="Titre du Post">
-        </div>
+        <input type="text" maxlength="50" name="tag" placeholder="Vos tags">
+        
         <div class="formText">
+        
         <textarea  maxlength="50" name="text" placeholder="Ecrivez votre Post"></textarea>
+        
         </div>
         <input type="file" name="img" class="imagebutton">
         <input class="btn" type="submit" name="action" value="Creer Post">
+        </div>
 </form>
+</div>
 
 
-<body\>
-</html>
+</main>
+
+<?php
+    $content = ob_get_clean();
+    require_once __DIR__.'/../template.php';
+?>

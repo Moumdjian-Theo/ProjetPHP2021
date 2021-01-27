@@ -9,14 +9,6 @@ ob_start();
 
 <main>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edition du profil</title>
-    <link rel="stylesheet" href="Asset\css\EditProfil.css">
-</head>
-<body>
     <div class="MainContent">
     <h2>Edition du profil</h2>
 
@@ -57,8 +49,7 @@ ob_start();
 </div>
 
 
-</body>
-<main>
+
 
 <?php
     $content = ob_get_clean();

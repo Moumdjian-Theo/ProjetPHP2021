@@ -9,16 +9,17 @@ private $title;
 private $body;
 private $date;
 private $image;
+private $tag;
 
 
 
-
-function __construct($title,$body,$date,$image){
+function __construct($title,$body,$date,$image,$tag){
     
     $this->title = $title;
     $this->body = $body;
     $this->date = $date;
     $this->image = $image;
+    $this->tag = $tag;
 }
 
 public function getId(){
@@ -54,6 +55,14 @@ public function setImage($image){
     $this->image = $image;
 }
 
+public function getTag(){
+    return $this->tag;
+}
+
+public function setTag($tag){
+    $this->tag = $tag;
+}
+
 
 static function getPost(){
 
@@ -76,7 +85,8 @@ static function getPost(){
                 $result[$i]['id'],
                 $result[$i]['title'],
                 $result[$i]['body'],
-                $result[$i]['image']
+                $result[$i]['image'],
+                $result[$i]['tag']
             ));
         }
       
@@ -86,16 +96,17 @@ static function getPost(){
 
     
 
-   static function insertNewPost($title,$body,$image)
+   static function insertNewPost($title,$body,$image,$tag)
     {
         $DB = static::DBConnect();
 
         $request_newpost = $DB->prepare('INSERT INTO `posts` (
                                                              `title`,
                                                              `body`,                                                 
-                                                             `image`)
-                                        VALUES (  ? , ? , ?)');
-        $request_newpost->execute ([$title,$body,$image]);
+                                                             `image`,
+                                                             `tag`)
+                                        VALUES (  ? , ? , ? , ?)');
+        $request_newpost->execute ([$title,$body,$image,$tag]);
 
         return $DB->lastInsertId();
 

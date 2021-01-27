@@ -23,7 +23,10 @@ class PostC {
                 if(isset($_POST['action'])){
                     if(!empty($_POST['title']) && !empty($_POST['text'])){
                        
-                        Post::insertNewPost($_POST['title'],$_POST['text'],$_POST['img']);
+                        Post::insertNewPost($_POST['title'],$_POST['text'],$_POST['img'],$_POST['tag']);
+
+                        $_SESSION['popup'] = new PopUp('success', 'Votre poste a bien été crée.');
+                header('location: /projetphp2021/createpost');
                         
                     }
                 }
