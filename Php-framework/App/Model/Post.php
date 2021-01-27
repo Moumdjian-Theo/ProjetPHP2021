@@ -18,10 +18,10 @@ class Post extends Model {
     private $picture;
     private $body;
     private $date;
-    private $love= [];
-    private $cute = [];
-    private $trop_stylé= [];
-    private $swag=[];
+    private $love;
+    private $cute;
+    private $trop_stylé;
+    private $swag;
     
     
 
@@ -113,6 +113,8 @@ class Post extends Model {
     public function setSwag($swag){
         $this->swag = $swag;
     }
+
+
 
     public function getSwagUsers($id_post)
     {

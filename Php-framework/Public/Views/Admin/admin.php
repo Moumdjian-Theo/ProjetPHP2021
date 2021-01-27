@@ -48,7 +48,7 @@ ob_start();
                                 </select>";
 
                     echo "<td> <input type=\"submit\" value=\"Edit\"/> </td>";
-                    echo "<td> <a href=\"/projetphp2021/delete.php?id=".$user->getId()."\"> Delete </a> </td>";
+                    echo "<td> <a href=\"/projetphp2021/deleteUser.php?id=".$user->getId()."\"> Delete </a> </td>";
                     echo "</form>";
                     echo "</tr>";
                 }
@@ -74,9 +74,9 @@ ob_start();
                     <th>Text</th>
                     <th>Date </th>
                     <th>Love</th>
-                    <th>Swag</th>
                     <th>Cute</th>
-                    <th>Stylé<th>
+                    <th>Trop Stylé</th>
+                    <th>Swag<th>
                     <th>Drop</th>
                 </tr>
             </thead>
@@ -94,10 +94,10 @@ ob_start();
                         echo "<td>".$post->getPicture()."</td>";
                         echo "<td>".$post->getBody()."</td>";
                         echo "<td>".$post->getDate()."</td>";
-                        echo "<td> 1 </td>";
-                        echo "<td> 1 </td>";
-                        echo "<td> 1 </td>";
-                        echo "<td> 1 </td>";
+                        echo "<td>".$post->getLove()."</td>";
+                        echo "<td>".$post->getCute()."</td>";
+                        echo "<td>".$post->getTrop_Stylé()."</td>";
+                        echo "<td>".$post->getSwag()."</td>";
                         echo "<td> </td>";
                         echo "<td> <a href=\"/projetphp2021/deletePost.php?id=".$post->getId()."\"> Delete </a> </td>";
                          echo "</form>";
