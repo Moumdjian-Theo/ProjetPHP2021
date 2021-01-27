@@ -12,8 +12,9 @@ private $image;
 
 
 
-function __construct($id,$title,$body,$date,$image){
-    $this->id = $id;
+
+function __construct($title,$body,$date,$image){
+    
     $this->title = $title;
     $this->body = $body;
     $this->date = $date;

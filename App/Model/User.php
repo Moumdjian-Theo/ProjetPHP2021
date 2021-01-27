@@ -63,7 +63,7 @@ class User extends Model{
     }
 
     public function getRole(){
-        return $this-> $role;
+        return $this->role;
     }
 
     public function setRole($role){

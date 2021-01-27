@@ -40,7 +40,7 @@ require_once __DIR__.'/../Model/Post.php';
     Public function displayPost(){
         
         $posts = Post::getPost();
-        var_dump($posts);
+        
         
         View::render('Accueil/Acceuil', []);
     }
