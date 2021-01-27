@@ -124,7 +124,7 @@ class Post extends Model {
         $this->tag = $tag;
     }
 
-    public function insertStylishUser($id_post)
+    public static function insertStylishUser($id_post)
     {
         $DB = static::DBConnect();
 
@@ -135,7 +135,7 @@ class Post extends Model {
 
     }
 
-    public function insertCuteUser($id_post)
+    public static  function insertCuteUser($id_post)
     {
         $DB = static::DBConnect();
 
@@ -146,7 +146,7 @@ class Post extends Model {
 
     }
 
-    public function insertSwagUser($id_post)
+    public static function insertSwagUser($id_post)
     {
         $DB = static::DBConnect();
 
@@ -157,15 +157,25 @@ class Post extends Model {
 
     }
 
-    public function insertLoveUser($id_post)
+    public static function insertLoveUser($id_user,$id_post)
     {
         $DB = static::DBConnect();
 
         $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,Love)');
-        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+        $request_stylish->execute([$id_user,$id_post]);
 
         return;
 
+    }
+
+    public static function incrementLove($id_post)
+    {
+        $DB =static::DBConnect();
+
+        $request_increment = $DB->prepare('UPDATE `post` SET `love` = love + 1 WHERE `id` = ?');
+        $request_increment->execute([$id_post]);
+
+        return;
     }
 
 
@@ -258,8 +268,8 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` = ? ');
-        $request_tag->execute([$tag]);
+        $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` LIKE ? ');
+        $request_tag->execute(["%".$tag."%"]);
         $response = $request_tag->fetchaAll();
 
         if(sizeof($response) == 0)
@@ -291,21 +301,12 @@ class Post extends Model {
         
     }
 
-    public static function addNewTag($tag)
-    {
-        $DB = static::DBConnect();
-
-        $request_addtag = $DB->prepare('INSERT INTO `post` (`tag`) VALUES (?)');
-        $request_addtag->execute([$tag]);
-        return;
-    }
-
     public static function searchPostByText($text)
     {
         $DB = static::DBConnect();
 
-        $request_text = $DB->prepare("SELECT * FROM `post` WHERE body LIKE \"%star wars%\"");
-        $request_text->execute([$text]);
+        $request_text = $DB->prepare("SELECT * FROM `post` WHERE `body` LIKE ?");
+        $request_text->execute(["%".$text."%"]);
 
         $response = $request_text->fetchAll();
 
@@ -338,6 +339,17 @@ class Post extends Model {
         return $listPost;
     }
 
+    public static function addNewTag($tag)
+    {
+        $DB = static::DBConnect();
+
+        $request_addtag = $DB->prepare('INSERT INTO `post` (`tag`) VALUES (?)');
+        $request_addtag->execute([$tag]);
+        return;
+    }
+
+
+
     public static function deletePost($id_post)
     {
         $DB = static::DBConnect();
@@ -356,5 +368,54 @@ class Post extends Model {
         $count = $request_post->fetchColumn();
         return $count;
     }
+
+    public static function isInsertedLove($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+        $request_user = $DB->prepare("SELECT * FROM `reaction` WHERE `id_user` = ? and `id_post`= ? and `typeR`= \'love\'");
+        $request_user->execute([$id_user,$id_post]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+
+    public static function isInsertedCute($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_user = $DB->prepare('SELECT * FROM `reaction` WHERE `id_post` = ? AND `id_user` = ? AND `typeR` = ?');
+        $request_user->execute([$id_user,$id_post,"cute"]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+
+    public static function isInsertedSwag($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_user = $DB->prepare('SELECT * FROM `reaction` WHERE `id_post` = ? AND `id_user` = ? AND `typeR` = ?');
+        $request_user->execute([$id_user,$id_post,"swag"]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+
+    public static function isInsertedStylish($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_user = $DB->prepare('SELECT * FROM `reaction` WHERE `id_post` = ? AND `id_user` = ? AND `typeR` = ?');
+        $request_user->execute([$id_user,$id_post,"cute"]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+    
+    
     
 }

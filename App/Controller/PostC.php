@@ -15,34 +15,63 @@ require_once __DIR__.'/../Model/Post.php';
 session_start();
 
 class PostC {
-    public function CreatePost() {
-
-    if(isset($_SESSION['user']))
+    public function CreatePost() 
     {
-        if($_SESSION['user']->getRole() =='2'){
 
-        
-            if(!empty($_POST)){
-                if(isset($_POST['action'])){
-                    if(!empty($_POST['title']) && !empty($_POST['text'])){
-                       
-                        Post::insertNewPost($_SESSION['user']->getId(),$_POST['title'],$_POST['img'],$_POST['text'],date("Y-m-d H:i:s"),0,0,0,0,$_POST['tag']);
+        if(isset($_SESSION['user']))
+        {
+            if($_SESSION['user']->getRole() =='2'){
 
-                        $_SESSION['popup'] = new PopUp('success', 'Votre poste a bien été crée.');
-                header('location: /projetphp2021/createpost');
+            
+                if(!empty($_POST)){
+                    if(isset($_POST['action'])){
+                        if(!empty($_POST['title']) && !empty($_POST['text'])){
                         
-                    }
-                }
+                            Post::insertNewPost($_SESSION['user']->getId(),$_POST['title'],$_POST['img'],$_POST['text'],date("Y-m-d H:i:s"),0,0,0,0,$_POST['tag']);
 
+                            $_SESSION['popup'] = new PopUp('success', 'Votre poste a bien été crée.');
+                    header('location: /projetphp2021/createpost');
+                            
+                        }
+                    }
+
+                }
+            
+            
+            View::render('CreatePost/CreatePost', []);
             }
-        
-        
-        View::render('CreatePost/CreatePost', []);
+        }
+        else 
+        {
+            header('location: /projetphp2021/signin');
         }
     }
-    else 
+
+    public function incrementer()
     {
-        header('location: /projetphp2021/signin');
+        if(isset($_SESSION['user']))
+        {
+            if(isset($_POST['button1']))
+            {
+                if(isset($_GET['id']))
+                {
+                    if(!Post::isInsertedLove($_SESSION['user']->getId(),$_GET['id']))
+                    {
+                        Post::incrementLove($_GET['id']);
+                        Post::insertLoveUser($_SESSION['user']->getId(),$_GET['id']);
+                        header('location: accueil');
+                    }
+                    else
+                    {
+                        header('location: accueil');
+                    }
+
+                }
+                
+            }
+            
+        }
     }
-}
+
+
 }

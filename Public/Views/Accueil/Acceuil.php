@@ -46,15 +46,18 @@
         echo "<img src=".$post->getPicture()." class=\"img\"/>";
         echo "<div class=\"text\">".$post->getBody()."</div>";
         
+        echo "<form method=\"post\" action=\"/projetphp2021/incrementer.php?id=".$post->getId().">";
         echo "<div class=\"buttonContainer\">"; 
-        echo "<i class=\"far fa-kiss-wink-heart\"></i>";
-        echo "<span class=\"number\">".$post->getLove()."</span>";
+        echo "<button name=\"button1\" type=\"submit\" class=\"buttonEmoji\"> <i class=\"far fa-kiss-wink-heart\"></i>";
+        echo "<span class=\"number\">".$post->getCute()."</span> </button>";
+
         echo "<i class=\"far fa-grin-hearts\"></i>";                        
-        echo "<span class=\"number\">".$post->getCute()."</span>";
+        echo "<span class=\"number\">".$post->getTrop_Stylé()."</span>";
         echo "<i class=\"far fa-heart\"></i>";
-        echo "<span class=\"number\">".$post->getTrop_stylé()."</span>";
+        echo "<span class=\"number\">".$post->getLove()."</span>";
         echo "<i class=\"far fa-hand-spock\"></i>"; 
         echo "<span class=\"number\">".$post->getSwag()."</span>"; 
+        echo "</form>";
         
         echo"</div>
         </div>

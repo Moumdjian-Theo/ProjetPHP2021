@@ -37,7 +37,7 @@ session_start();
                 if($_SESSION['user']->getRole() == 2)
                 {
                     $listPost = Post::searchPostByText($_POST['search-data']);
-                    View::render('Accueil/AccueilVannestarre', ['postlist' => $listPost]);
+                    View::render('Accueil/AccueilVannestarre', ['postlist' => $listPost]);     
                 }
                 else
                 {
