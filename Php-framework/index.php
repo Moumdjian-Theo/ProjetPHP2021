@@ -27,6 +27,8 @@ $Router->add('/projetphp2021/admin',['controller' =>'AdminC@verificateRole']);
 $Router->add('/projetphp2021/deleteuser.php',['controller' => 'AdminC@deleteUser']);
 $Router->add('/projetphp2021/edit.php',['controller' => 'AdminC@editRole']);
 $Router->add('/projetphp2021/deletepost.php',['controller' =>'AdminC@deletePost']);
+$Router->add('/projetphp2021/deconnexion',['controller' =>'UserC@deconnexion']);
+
 
 
 /**
