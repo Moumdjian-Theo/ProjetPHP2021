@@ -3,7 +3,6 @@
  *  
  *  @brief : modals popup js 
  * 
- * 
  */
 
 
@@ -28,3 +27,4 @@ for (var i = 0; i < Popups.length; ++i) {
 function deletePopUp(popup) {
     popup.remove();
 } // function deletePopUp(popup) 
+
