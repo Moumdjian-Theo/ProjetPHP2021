@@ -34,6 +34,7 @@ $Router->add('/projetphp2021/searchpost',['controller' =>'SearchC@SearchPost']);
 $Router->add('/projetphp2021/incrementer.php',['controller' =>'PostC@incrementer']);
 
 
+
 /**
  * How to add a route :
  * $router->add(URL, ['controller' => ControllerPage@MethodName]);
