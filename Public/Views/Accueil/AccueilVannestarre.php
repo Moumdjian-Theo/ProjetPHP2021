@@ -22,7 +22,9 @@
         echo "<div class=\"textPosition\">";
         echo "<span class=\"date\">".$post->getDate()."</span>";
         echo "<div class=\"title\">".$post->getTitle()."</div>";
-        echo "<img src=\"/projetphp2021/Public/assets/imgs/".$post->getPicture()."\"class=\"img\">";
+        if (strlen($post->getPicture()) != 0) {
+            echo "<img src=\"/projetphp2021/Public/assets/imgs/".$post->getPicture()."\"class=\"img\">";
+        }     
         echo "<div class=\"text\">".$post->getBody()."</div>";
         echo "<div class=\"tags\">".$post->getTag()."</div>";
         
