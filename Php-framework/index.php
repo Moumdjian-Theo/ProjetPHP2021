@@ -8,7 +8,7 @@
 
 // require Core files
 require_once('./Core/Model.php');
-reqire_once('./Core/View.php');
+require_once('./Core/View.php');
 
 
 // Router
