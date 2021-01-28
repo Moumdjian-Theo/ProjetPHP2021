@@ -6,9 +6,7 @@
  *  
  *  @brief :  Example controller pages
  * 
- * 
  */
-
 
 
 // required models
@@ -18,7 +16,6 @@
 // session_start();
 
  class TemplateC {
-
 
     /**
      *  @name : exampleMethod
@@ -32,5 +29,4 @@
         var_dump('example');
 
     }// public function createCar()
-
 }
