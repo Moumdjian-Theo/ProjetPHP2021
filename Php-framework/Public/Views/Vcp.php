@@ -3,9 +3,7 @@
 /**
  * 
  *  @title : 
- *  @author : Mathieu LEBRUN
- *  @author : Antoine DELAUNAY
- *  @author : Matthis HOULES
+
  * 
  *  @brief : 
  * 
