@@ -5,6 +5,11 @@
         unset($_SESSION['popup']);
     }
 
+    if(isset($_SESSION['user']))
+    {
+        $username = $_SESSION['user']->getPseudo();
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +44,7 @@
             <li><a href="./EditProfile">Profil</a></li>
             <li><a href="./Admin">Admin</a></li>
             <li><a href="./Deconnexion">Se déconnecter </a></li>
+            <li> <a href="#"> <?php echo $username ?> </a> </li>
             
         </div>
         <div class="search-icon">
