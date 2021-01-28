@@ -45,6 +45,7 @@
         echo "<div class=\"title\">".$post->getTitle()."</div>";
         echo "<img src=\"/Public\assets\imgs\\".$post->getPicture()." class=\"img\"/>";
         echo "<div class=\"text\">".$post->getBody()."</div>";
+        echo "<div class=\"tags\">".$post->getTag()."</div>";
         
         echo "<form method=\"post\" action=\"/projetphp2021/incrementer.php?id=".$post->getId()."\">";
         echo "<div class=\"buttonContainer\">"; 
