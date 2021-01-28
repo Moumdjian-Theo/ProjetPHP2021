@@ -3,9 +3,10 @@
 /**
  *  @title : Confirmation.php
  * 
- *  @author : Guillaume RISCH
- *  @author : Théo MOUMDJIAN
- *  @author : Ousama LOURGUI
+ * @author : Théo MOUMDJIAN 
+ * @author : Guillaume RISCH 
+ * @author : Ousama LOURGUI
+ * @author : Haitam FERTOUT
  * 
  *  @brief : user confirmations (change pwd, account creation) class
  * 
