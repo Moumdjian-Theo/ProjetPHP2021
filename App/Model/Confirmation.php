@@ -5,7 +5,7 @@
  * 
  *  @author : Guillaume RISCH
  *  @author : Théo MOUMDJIAN
- *  @refractor : Matthis HOULES
+ *  @author : Ousama LOURGUI
  * 
  *  @brief : user confirmations (change pwd, account creation) class
  * 
