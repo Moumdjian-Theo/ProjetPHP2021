@@ -49,12 +49,12 @@ public function signUp()
 
             // insertion dans la base de données
             $userId = User::registerUser($_POST['mailInput'], $cryptedPwd,$_POST['usernameInput']);
+            $mail = new Mail;
+            $mail->sendMail(['email' => $_POST['mailInput'], 'pseudo' => $_POST['usernameInput']], 'Merci de votre inscription', ['confirmationAccount']); 
 
-            
-            $_SESSION['popup'] = new PopUp('success', 'Votre compte a bien été créé, mais il n\'est pas encore actif. Pour l\'activer, veuillez vérifier vos mails.');
+            $_SESSION['popup'] = new PopUp('success', 'Votre compte a bien été créé, vérifier vos mails.');
             header('location: /projetphp2021/SignUp');
             exit;
-
         }
 
         View::render('User/SignUp', []);
