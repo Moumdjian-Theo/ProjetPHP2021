@@ -55,21 +55,85 @@ class PostC {
             {
                 if(isset($_GET['id']))
                 {
-                    if(!Post::isInsertedLove($_SESSION['user']->getId(),$_GET['id']))
+                    if(!Post::isInserted($_SESSION['user']->getId(),$_GET['id']))
                     {
-                        Post::incrementLove($_GET['id']);
-                        Post::insertLoveUser($_SESSION['user']->getId(),$_GET['id']);
+                        Post::incrementCute($_GET['id']);
+                        Post::insertCuteUser($_SESSION['user']->getId(),$_GET['id']);
                         header('location: accueil');
+                        exit();
                     }
                     else
                     {
                         header('location: accueil');
+                        exit();
                     }
 
                 }
                 
             }
+            if(isset($_POST['button2']))
+            {
+                if(isset($_GET['id']))
+                {
+                    if(!Post::isInserted($_SESSION['user']->getId(),$_GET['id']))
+                    {
+                        Post::incrementTrop_stylé($_GET['id']);
+                        Post::insertTrop_styléUser($_SESSION['user']->getId(),$_GET['id']);
+                        header('location: accueil');
+                        exit();
+                    }
+                    else
+                    {
+                        header('location: accueil');
+                        exit();
+                    }
+
+                }
+            }
+            if(isset($_POST['button3']))
+            {
+                if(isset($_GET['id']))
+                {
+                    if(!Post::isInserted($_SESSION['user']->getId(),$_GET['id']))
+                    {
+                        Post::incrementLove($_GET['id']);
+                        Post::insertLoveUser($_SESSION['user']->getId(),$_GET['id']);
+                        header('location: accueil');
+                        exit();
+                    }
+                    else
+                    {
+                        header('location: accueil');
+                        exit();
+                    }
+
+                }
+            }
+            if(isset($_POST['button4']))
+            {
+                if(isset($_GET['id']))
+                {
+                    if(!Post::isInserted($_SESSION['user']->getId(),$_GET['id']))
+                    {
+                        Post::incrementSwag($_GET['id']);
+                        Post::insertSwagUser($_SESSION['user']->getId(),$_GET['id']);
+                        header('location: accueil');
+                        exit();
+                    }
+                    else
+                    {
+                        header('location: accueil');
+                        exit();
+                    }
+
+                }
+            }
             
+        }
+        else 
+        {
+            header('location: signin');
+            exit();
         }
     }
 
