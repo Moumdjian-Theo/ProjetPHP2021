@@ -18,7 +18,7 @@ class Config {
 
     const DB_PWD = '';
 
-}
+} 
 
 
-?>
+?> //config
