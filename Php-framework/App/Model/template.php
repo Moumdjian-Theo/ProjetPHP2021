@@ -11,7 +11,6 @@ class Template extends Model{
     // class vars
     // protected $var;
 
-
     /**
      *  @name : __construct
      * 
@@ -21,9 +20,5 @@ class Template extends Model{
     function __construct() {
     
     }
-
 }
-
-
-
 ?>
