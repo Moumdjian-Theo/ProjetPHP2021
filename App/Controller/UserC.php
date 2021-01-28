@@ -8,6 +8,8 @@ require_once __DIR__.'/../../Core/PopUp.php';
 
 require_once (__DIR__.'/../Model/User.php');
 
+require_once (__DIR__.'/../../Core/Mail.php');
+
 session_start();
 
 

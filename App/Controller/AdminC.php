@@ -3,6 +3,10 @@
 /**
  * 
  *  @name : templateC.php
+ * @author : Théo MOUMDJIAN 
+ * @author : Guillaume RISCH 
+ * @author : Ousama LOURGUI
+ * @author : Haitam FERTOUT
  *  
  *  @brief :  Example controller pages
  * 
@@ -61,14 +65,23 @@ session_start();
 
     public function deleteUser()
     {
-        if(isset($_SESSION))
+        if(isset($_SESSION['user']))
         {
             if($_SESSION['user']->getRole() ==  '2')
             {
-                $id = $_GET['id'];
-                $_SESSION['user']->deleteUser($id);
-                header('location: /projetphp2021/admin');
-                exit;
+                if(isset($_GET['id']))
+                {
+                    $id = $_GET['id'];
+                    $_SESSION['user']->deleteUser($id);
+                    header('location: /projetphp2021/admin');
+                    exit;
+                }
+                else 
+                {
+                    header('location: /projetphp2021/admin');
+                    exit;
+                }
+                
             }
             else
             {
@@ -86,21 +99,30 @@ session_start();
     public function editRole()
     {
 
-        if(isset($_SESSION))
+        if(isset($_SESSION['user']))
         {
             if($_SESSION['user']->getRole() ==  '2')
             {
-                $id = $_GET['id'];
-                $role = $_POST['role'];
-                if(isset($role))
+                if(isset($_GET['id']))
                 {
+                    $id = $_GET['id'];
+                    if(isset($_POST['role']))
+                    {
+                        $role = $_POST['role'];
+                        if(isset($role))
+                        {
+                            $_SESSION['user']->editRole($id,$role);
+                            header('location: /projetphp2021/admin');
+                            exit;
+                        }
+                    }
+                    else
+                    {
+                        header('location: /projetphp2021/admin');
+                        exit;
+                    }
 
-                    echo " ".$role;
-                    $_SESSION['user']->editRole($id,$role);
-                    header('location: /projetphp2021/admin');
-                    exit;
                 }
-
             }
             else
             {
@@ -115,16 +137,58 @@ session_start();
         }
     }
 
+    public function editNumber()
+    {
+        if(isset($_SESSION['user']))
+        {
+            if($_SESSION['user']->getRole() == 2)
+
+                if(!empty($_POST['nbrlove']) && isset($_POST['nbrlove']))
+                {
+                    if(isset($_GET['id']))
+                    {
+                        Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']);
+                        header('location: /projetphp2021/admin');
+                        exit();
+                    }
+                    else 
+                    {
+                        header('location: /projetphp2021/admin');
+                        exit();
+                    }
+
+                }
+                {
+                    header('location: /projetphp2021/admin');
+                    exit();
+                }
+        }
+        else
+        {
+            header('location: /projetphp2021/accueil');
+            exit;
+        }
+        
+    }
+
     public function deletePost()
     {
-        if(isset($_SESSION))
+        if(isset($_SESSION['user']))
         {
             if($_SESSION['user']->getRole() ==  '2')
             {
-                $id_post=$_GET['id'];
-                Post::deletePost($id_post);
-                header('location: /projetphp2021/admin');
-                exit;
+                if(isset($_GET['id']))
+                {
+                    $id_post=$_GET['id'];
+                    Post::deletePost($id_post);
+                    header('location: /projetphp2021/admin');
+                    exit;
+                }
+                else 
+                {
+                    header('location: /projetphp2021/admin');
+                    exit;
+                }
             }
             else
             {

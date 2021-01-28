@@ -34,7 +34,7 @@ ob_start();
                 foreach($userlist as $user)
                 {
                     echo "<tr>";
-                    echo "<form method=\"post\" action=\"/projetphp2021/edit.php?id=".$user->getId()."\">";
+                    echo "<form method=\"post\" action=\"/projetphp2021/edit/edituser.php?id=".$user->getId()."\">";
                     echo "<td>".$user->getId()."</td>";
                     echo "<td>".$user->getPseudo()."</td>";
                     echo "<td>".$user->getMail()."</td>";
@@ -48,7 +48,7 @@ ob_start();
                                 </select>";
 
                     echo "<td> <input type=\"submit\" value=\"Edit\"/> </td>";
-                    echo "<td> <a href=\"/projetphp2021/deleteUser.php?id=".$user->getId()."\"> Delete </a> </td>";
+                    echo "<td> <a href=\"/projetphp2021/delete/deleteUser.php?id=".$user->getId()."\"> Delete </a> </td>";
                     echo "</form>";
                     echo "</tr>";
                 }
@@ -78,6 +78,8 @@ ob_start();
                     <th>Trop Stylé</th>
                     <th>Swag</th>
                     <th>tag</th>
+                    <th>NombreLoveMax</th>
+                    <th>Edit</th>
                     <th>Drop</th>
                 </tr>
             </thead>
@@ -88,6 +90,7 @@ ob_start();
                     foreach($postlist as $post)
                     {
                         echo "<tr>";
+                        echo "<form method=\"post\" action=\"/projetphp2021/edit/editpost.php?id=".$post->getId()."\">";
                         echo" <td>".$post->getId()."</td>";
                         echo "<td>".$post->getUser_id()."</td>";
                         echo "<td>".$post->getTitle()."</td>";
@@ -99,8 +102,11 @@ ob_start();
                         echo "<td>".$post->getTrop_Stylé()."</td>";
                         echo "<td>".$post->getSwag()."</td>";
                         echo "<td>".$post->getTag()."</td>";
-                        echo "<td><a href=\"/projetphp2021/deletePost.php?id=".$post->getId()."\"> Delete </a> </td>";
+                        echo "<td> <input type = 'number' min='0' name=\"nbrlove\" value=".$post->getNbr()." </td>";
+                        echo "<td> <input type=\"submit\" value=\"Edit\"/> </td>";
+                        echo "<td><a href=\"/projetphp2021/delete/deletePost.php?id=".$post->getId()."\"> Delete </a> </td>";
                         echo "</tr>";
+                        echo "</form>";
                     }
                 }
                 else 

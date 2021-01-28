@@ -54,6 +54,13 @@
    
 }
 
+
+.tags
+{
+    font-weight: bold;
+    
+}
+
 .buttonEmoji
 {
     background-color:rgb(218, 238, 255);
@@ -80,8 +87,8 @@
 
 .img{
     
-    width: 100%;
-    height: 100%;
+    width: 40%;
+    height: 40%;
 }
 
 

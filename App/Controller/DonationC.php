@@ -19,14 +19,14 @@ require_once (__DIR__.'/../Model/Post.php');
 // session_start ?
  session_start();
 
- class DonnationC {
+ class DonationC {
 
 
 
     public function DisplayPage() {
     
         
-            View::render('Donnation/Donnation');
+            View::render('Donation/Donation');
        
 
 

@@ -4,6 +4,10 @@
 /**
  * 
  *  @name : templateC.php
+ * @author : Théo MOUMDJIAN 
+ * @author : Guillaume RISCH 
+ * @author : Ousama LOURGUI
+ * @author : Haitam FERTOUT
  *  
  *  @brief :  Example controller pages
  * 
@@ -30,7 +34,7 @@ session_start();
      * 
      */
     public function DisplayPage() {
-        View::render('Accueil/Acceuil', []);
+        View::render('Accueil/Accueil', []);
 
     }// public function createCar()
 

@@ -3,6 +3,10 @@
 
 /**
  * 
+ * @author : Théo MOUMDJIAN 
+ * @author : Guillaume RISCH 
+ * @author : Ousama LOURGUI
+ * @author : Haitam FERTOUT
  *  @name : templateC.php
  *  
  *  @brief :  Example controller pages
@@ -40,12 +44,12 @@ require_once (__DIR__.'/../Model/Post.php');
             }
             else 
             {
-                View::render('Accueil/Acceuil', ['postlist' => $listPost]);
+                View::render('Accueil/Accueil', ['postlist' => $listPost]);
             }
         }
         else
         {
-            View::render('Accueil/Acceuil', ['postlist' => $listPost]);
+            View::render('Accueil/Accueil', ['postlist' => $listPost]);
         }
 
 

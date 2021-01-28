@@ -3,6 +3,10 @@
 /**
  * 
  *  @name : templateC.php
+ * @author : Théo MOUMDJIAN 
+ * @author : Guillaume RISCH 
+ * @author : Ousama LOURGUI
+ * @author : Haitam FERTOUT
  *  
  *  @brief :  Example controller pages
  * 
@@ -42,19 +46,19 @@ session_start();
                 else
                 {
                     $listPost = Post::searchPostByText($_POST['search-data']);
-                    View::render('Accueil/Acceuil', ['postlist' => $listPost]);
+                    View::render('Accueil/Accueil', ['postlist' => $listPost]);
                 }
             }
             else 
             {
-                header('location : Accueil/acceuil');
+                header('location : Accueil/Accueil');
                 exit;
             }
 
         }
         else 
         {
-            header('location : Accueil/acceuil');
+            header('location : Accueil/Accueil');
             exit;
         }
 

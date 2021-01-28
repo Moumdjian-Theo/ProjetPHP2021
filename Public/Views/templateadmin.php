@@ -7,13 +7,21 @@
 
 ?>
 
+<?php
+
+if (isset($_SESSION['user']))
+    {
+        $username = $_SESSION['user']->getPseudo();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil</title>
-    <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/Acceuil.css">
+    <title>Accueil</title>
+    <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/Accueil.css">
     <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/popup.css">
     <script src="/ProjetPHP2021/Public/assets/js/popup.js" defer></script>
     <script src="https://kit.fontawesome.com/b18ab37082.js" crossorigin="anonymous"></script>
@@ -23,7 +31,7 @@
     <?php foreach ($listJS as $key => $value) { ?>
         <script src="/ProjetPHP2021/Public/assets/js/<?= $value ?>.js" defer></script>
     <?php } ?>
-    <script src="/ProjetPHP2021/Public/assets/js/Acceuil.js"defer></script>
+    <script src="/ProjetPHP2021/Public/assets/js/Accueil.js"defer></script>
 </head>
 <body>
     <nav>
@@ -34,7 +42,7 @@
         <div class="logo">Vanestarre</div>
         
         <div class="nav-items">
-            <li><a href="./Accueil">Acceuil</a></li>
+            <li><a href="./Accueil">Accueil</a></li>
             <li><a href="./CreatePost"> Créér un post </a></li>
             <li><a href="./EditProfile">Profil</a></li>
             <li><a href="./Admin">Admin</a></li>
@@ -56,5 +64,12 @@
     <?= $content ?>
 
 </body>
+
+
+<footer>
+   
+ <div class="pseudo"><?php echo $username ?></div> 
+
+</footer>
 </html>
 

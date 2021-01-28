@@ -16,7 +16,7 @@ ob_start();
 <form action="" method="post">
     <div class="container">
         <input type="text" name="title" placeholder="Titre du Post">
-        <input type="text" maxlength="50" name="tag" placeholder="Vos tags">
+        <input type="text" maxlength="50" name="tag" placeholder="Vos tags" value="β">
         
         <div class="formText">
         
