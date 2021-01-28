@@ -15,7 +15,6 @@ final class Cookie {
     protected $expires;
     protected $path;
 
-
     function __construct() {} // constructor
 
     public function getName(){
