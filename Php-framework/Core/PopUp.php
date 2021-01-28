@@ -5,6 +5,7 @@
  *  @title : PopUp.php
  * 
  *  @brief : Modals PopUps
+ 
  */
 
 class PopUp {
