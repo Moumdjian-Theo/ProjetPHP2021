@@ -50,7 +50,6 @@
     font-size : 14px;
 }
 
-
 @media screen and (max-width : 426px) {
     .popup {
         bottom : 64px;
