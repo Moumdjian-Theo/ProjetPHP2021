@@ -2,7 +2,7 @@
 
 
     $listStyles = ['CardPost'];
-    $listJS = ['Acceuil'];
+    $listJS = ['Accueil'];
 
     ob_start();
 

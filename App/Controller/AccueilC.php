@@ -40,12 +40,12 @@ require_once (__DIR__.'/../Model/Post.php');
             }
             else 
             {
-                View::render('Accueil/Acceuil', ['postlist' => $listPost]);
+                View::render('Accueil/Accueil', ['postlist' => $listPost]);
             }
         }
         else
         {
-            View::render('Accueil/Acceuil', ['postlist' => $listPost]);
+            View::render('Accueil/Accueil', ['postlist' => $listPost]);
         }
 
 

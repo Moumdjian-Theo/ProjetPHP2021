@@ -106,6 +106,7 @@ ob_start();
                         echo "<td> <input type=\"submit\" value=\"Edit\"/> </td>";
                         echo "<td><a href=\"/projetphp2021/delete/deletePost.php?id=".$post->getId()."\"> Delete </a> </td>";
                         echo "</tr>";
+                        echo "</form>";
                     }
                 }
                 else 

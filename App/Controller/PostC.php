@@ -57,6 +57,7 @@ class PostC {
                 {
                     if(!Post::isInserted($_SESSION['user']->getId(),$_GET['id']))
                     {
+
                         Post::incrementCute($_GET['id']);
                         Post::insertCuteUser($_SESSION['user']->getId(),$_GET['id']);
                         header('location: accueil');
@@ -97,9 +98,13 @@ class PostC {
                     if(!Post::isInserted($_SESSION['user']->getId(),$_GET['id']))
                     {
                         Post::incrementLove($_GET['id']);
+                        if(Post::isLoveLimit($_GET['id']))
+                        {
+                            header('location: /projetphp2021/donation');
+                            exit();
+                        }
                         Post::insertLoveUser($_SESSION['user']->getId(),$_GET['id']);
-                        header('location: accueil');
-                        exit();
+
                     }
                     else
                     {

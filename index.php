@@ -33,6 +33,7 @@ $Router->add('/projetphp2021/editprofile',['controller' =>'UserC@EditProfile']);
 $Router->add('/projetphp2021/createpost',['controller' =>'PostC@CreatePost']);
 $Router->add('/projetphp2021/searchpost',['controller' =>'SearchC@SearchPost']);
 $Router->add('/projetphp2021/incrementer.php',['controller' =>'PostC@incrementer']);
+$Router->add('/projetphp2021/donation',['controller' =>'DonationC@DisplayPage']);
 
 
 
