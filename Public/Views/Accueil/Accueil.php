@@ -8,32 +8,10 @@
 
 ?>
 
-<?php
 
-    $content = ob_get_clean();
-    if(isset($_SESSION['user']))
-    {
-        require_once __DIR__.'/../templateConnected.php';
-    }
-    else
-    {
-        require_once __DIR__.'/../template.php';
-    }
-        
-
-
-?>
 
 <main>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://kit.fontawesome.com/b18ab37082.js" crossorigin="anonymous"></script>
-        <title>Acceuil</title>
-    </head>
-    <body>
+   
 
  <?php 
     foreach($postlist as $post)
@@ -43,7 +21,9 @@
         echo "<div class=\"textPosition\">";
         echo "<span class=\"date\">".$post->getDate()."</span>";
         echo "<div class=\"title\">".$post->getTitle()."</div>";
-        echo "<img src=\"".$post->getPicture()." class=\"img\"/>";
+        if (strlen($post->getPicture()) != 0) {
+            echo "<img src=\"/projetphp2021/Public/assets/imgs/".$post->getPicture()."\"class=\"img\">";
+        }           
         echo "<div class=\"text\">".$post->getBody()."</div>";
         echo "<div class=\"tags\">".$post->getTag()."</div>";
         
@@ -68,9 +48,22 @@
     }
 ?>
 
-</body>
-</html>
+</main>
 
 
 
+<?php
 
+    $content = ob_get_clean();
+    if(isset($_SESSION['user']))
+    {
+        require_once __DIR__.'/../templateConnected.php';
+    }
+    else
+    {
+        require_once __DIR__.'/../template.php';
+    }
+        
+
+
+?>

@@ -100,6 +100,7 @@ class PostC {
                         Post::incrementLove($_GET['id']);
                         if(Post::isLoveLimit($_GET['id']))
                         {
+                           
                             header('location: /projetphp2021/donation');
                             exit();
                         }

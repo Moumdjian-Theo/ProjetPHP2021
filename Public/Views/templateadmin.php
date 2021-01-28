@@ -7,6 +7,14 @@
 
 ?>
 
+<?php
+
+if (isset($_SESSION['user']))
+    {
+        $username = $_SESSION['user']->getPseudo();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,5 +64,12 @@
     <?= $content ?>
 
 </body>
+
+
+<footer>
+   
+ <div class="pseudo"><?php echo $username ?></div> 
+
+</footer>
 </html>
 
