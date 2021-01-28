@@ -16,10 +16,8 @@
 
 
 // required models
-// require_once(__DIR__.'/../../Core/PopUp.php');
 
 // session_start ?
-
 
 require_once (__DIR__.'/../Model/User.php');
 require_once (__DIR__.'/../Model/Post.php');
@@ -50,14 +48,14 @@ session_start();
             }
             else
             {
-                header('location: /projetphp2021/accueil');
+                header('location: /accueil');
                 exit;
             }
 
         }
         else
         {
-            header('location: /projetphp2021/accueil');
+            header('location: /accueil');
             exit;
         }
 
@@ -73,25 +71,26 @@ session_start();
                 {
                     $id = $_GET['id'];
                     $_SESSION['user']->deleteUser($id);
-                    header('location: /projetphp2021/admin');
+                    $_SESSION['popup'] = new PopUp('success', 'utilisateur supprimé.');
+                    header('location: /admin');
                     exit;
                 }
                 else 
                 {
-                    header('location: /projetphp2021/admin');
+                    header('location: /admin');
                     exit;
                 }
                 
             }
             else
             {
-                header('location: /projetphp2021/accueil');
+                header('location: /accueil');
                 exit;
             }
         }
         else 
         {
-            header('location: /projetphp2021/accueil');
+            header('location: /accueil');
             exit;
         }
     }
@@ -112,13 +111,14 @@ session_start();
                         if(isset($role))
                         {
                             $_SESSION['user']->editRole($id,$role);
-                            header('location: /projetphp2021/admin');
+                            $_SESSION['popup'] = new PopUp('success', 'Role mis à jour.');
+                            header('location: /admin');
                             exit;
                         }
                     }
                     else
                     {
-                        header('location: /projetphp2021/admin');
+                        header('location: /admin');
                         exit;
                     }
 
@@ -126,13 +126,13 @@ session_start();
             }
             else
             {
-                header('location: /projetphp2021/accueil');
+                header('location: /accueil');
                 exit;
             }
         }
         else 
         {
-            header('location: /projetphp2021/accueil');
+            header('location: /accueil');
             exit;
         }
     }
@@ -148,24 +148,40 @@ session_start();
                     if(isset($_GET['id']))
                     {
                         Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']);
-                        header('location: /projetphp2021/admin');
+                        $_SESSION['popup'] = new PopUp('success', 'nombres de loves modifiés .');
+                        header('location: /admin');
                         exit();
                     }
                     else 
                     {
-                        header('location: /projetphp2021/admin');
+                        header('location: /admin');
                         exit();
                     }
 
                 }
+                if(!empty($_POST['body']) && isset($_POST['body']))
                 {
-                    header('location: /projetphp2021/admin');
+                    if(isset($_GET['id']))
+                    {
+                        Post::updateBody($_GET['id'],$_POST['body']);
+                        $_SESSION['popup'] = new PopUp('success', 'nombres de loves modifiés .');
+                        header('location: /admin');
+                        exit();
+                    }
+                    else 
+                    {
+                        header('location: /admin');
+                        exit();
+                    }
+                }
+                {
+                    header('location: /admin');
                     exit();
                 }
         }
         else
         {
-            header('location: /projetphp2021/accueil');
+            header('location: /accueil');
             exit;
         }
         
@@ -181,24 +197,25 @@ session_start();
                 {
                     $id_post=$_GET['id'];
                     Post::deletePost($id_post);
-                    header('location: /projetphp2021/admin');
+                    $_SESSION['popup'] = new PopUp('success', 'Poste supprimé.');
+                    header('location: /admin');
                     exit;
                 }
                 else 
                 {
-                    header('location: /projetphp2021/admin');
+                    header('location: /admin');
                     exit;
                 }
             }
             else
             {
-                header('location: /projetphp2021/accueil');
+                header('location: /accueil');
                 exit;
             }
         }
         else 
         {
-            header('location: /projetphp2021/accueil');
+            header('location: /accueil');
         }
     }
 
