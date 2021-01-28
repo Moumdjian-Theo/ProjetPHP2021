@@ -119,14 +119,6 @@ session_start();
                     }
 
                 }
-                else
-                {
-                    header('location: /projetphp2021/admin');
-                    exit;
-                }
-                
-
-
             }
             else
             {
@@ -139,6 +131,40 @@ session_start();
             header('location: /projetphp2021/accueil');
             exit;
         }
+    }
+
+    public function editNumber()
+    {
+        if(isset($_SESSION['user']))
+        {
+            if($_SESSION['user']->getRole() == 2)
+
+                if(!empty($_POST['nbrlove']) && isset($_POST['nbrlove']))
+                {
+                    if(isset($_GET['id']))
+                    {
+                        Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']);
+                        header('location: /projetphp2021/admin');
+                        exit();
+                    }
+                    else 
+                    {
+                        header('location: /projetphp2021/admin');
+                        exit();
+                    }
+
+                }
+                {
+                    header('location: /projetphp2021/admin');
+                    exit();
+                }
+        }
+        else
+        {
+            header('location: /projetphp2021/accueil');
+            exit;
+        }
+        
     }
 
     public function deletePost()

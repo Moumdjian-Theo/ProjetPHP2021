@@ -23,10 +23,11 @@ class Post extends Model {
     private $trop_stylé;
     private $swag;
     private $tag;
+    private $nbrMax;
     
     
 
-    function __construct($id,$user_id,$title,$picture, $body,$date,$cute,$trop_stylé,$love,$swag,$tag){
+    function __construct($id,$user_id,$title,$picture, $body,$date,$cute,$trop_stylé,$love,$swag,$tag,$nbrMax){
         $this->id = $id;
         $this->user_id = $user_id;
         $this->title = $title;
@@ -38,6 +39,8 @@ class Post extends Model {
         $this->love = $love;
         $this->swag = $swag;
         $this->tag = $tag;
+        $this->nbr = $nbrMax;
+    
     }
     public function getId(){
         return $this->id;
@@ -69,6 +72,16 @@ class Post extends Model {
     
     public function setUser_id($user_id){
         $this->user_id = $user_id;
+    }
+
+    public function getNbr()
+    {
+        return $this->nbr;
+    }
+
+    public function setNbr($nbr)
+    {
+        $this->nbr = $nbr;
     }
     
     public function getBody(){
@@ -204,8 +217,41 @@ class Post extends Model {
         return;
     }
 
+    public static function isLoveLimit($id_post)
+    {
+        $DB = static::DBConnect();
 
-    public static function insertNewPost($user_id, $title,$picture, $text, $date,$swag, $love, $cute, $stylish,$tag)
+        $request_limit = $DB->prepare('SELECT `love`,`nbr` FROM `post` WHERE `id` = ?');
+        $request_limit->execute([$id_post]);
+        $response = $request_limit->fetchAll();
+
+        if(sizeof($response)==0)
+        {
+            return false;
+        }
+        if ($response[0]['love'] == $response[0]['nbr'])
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+
+        
+    }
+
+    public static function updateLoveLimit($id_post,$nbr)
+    {
+        $DB = static::DBConnect();
+        $request_limit = $DB->prepare('UPDATE `post` SET`nbr` = ? WHERE `id` = ? ');
+        $request_limit->execute([$nbr,$id_post]);
+
+        return;
+    }
+
+
+    public static function insertNewPost($user_id, $title,$picture, $text, $date,$swag, $love, $cute, $stylish,$tag,$nbrMax)
     {
         $DB = static::DBConnect();
 
@@ -219,9 +265,9 @@ class Post extends Model {
                                                              `trop_stylé`,
                                                              `love`,
                                                              `swag`, 
-                                                             `tag`)
-                                        VALUES (? , ?, ? , ? , ? ,?,?,?,?,?)');
-        $request_newpost->execute ([$user_id,$title,$picture, $text, $date, $cute, $stylish, $love, $swag,$tag]);
+                                                             `tag`,`nbr`)
+                                        VALUES (? , ?, ? , ? , ? ,?,?,?,?,?,?)');
+        $request_newpost->execute ([$user_id,$title,$picture, $text, $date, $cute, $stylish, $love, $swag,$tag,$nbrMax]);
         return $DB->lastInsertId();
 
     }
@@ -251,7 +297,8 @@ class Post extends Model {
             $response[$i]['trop_stylé'],
             $response[$i]['love'],
             $response[$i]['swag'],
-            $response[$i]['tag']);
+            $response[$i]['tag'],
+            $response[$i]['nbr']);
 
         
     }
@@ -286,7 +333,8 @@ class Post extends Model {
                 $response[$i]['trop_stylé'],
                 $response[$i]['love'],
                 $response[$i]['swag'],
-                $response[$i]['tag']));
+                $response[$i]['tag'],
+                $response[$i]['nbr']));
         }
         return $listPost;
     }
@@ -319,7 +367,8 @@ class Post extends Model {
                 $response[$i]['trop_stylé'],
                 $response[$i]['love'],
                 $response[$i]['swag'],
-                $response[$i]['tag'])
+                $response[$i]['tag'],
+                $response[$i]['nbr'])
                          
             );
         }
@@ -359,7 +408,8 @@ class Post extends Model {
                 $response[$i]['trop_stylé'],
                 $response[$i]['love'],
                 $response[$i]['swag'],
-                $response[$i]['tag']
+                $response[$i]['tag'],
+                $response[$i]['nbr']
                 )         
             );
         }
