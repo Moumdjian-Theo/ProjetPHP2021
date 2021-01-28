@@ -15,7 +15,6 @@ for (var i = 0; i < Popups.length; ++i) {
 }
 
 
-
 /**
  * @name : deletePopUp
  * 
