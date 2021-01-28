@@ -4,7 +4,8 @@
  * 
  * @author : Théo MOUMDJIAN 
  * @author : Guillaume RISCH 
- * 
+ * @author : Ousama LOURGUI
+ *
  * @brief : User model
  */
 
