@@ -3,6 +3,10 @@
 
 /**
  * 
+ * @author : Théo MOUMDJIAN 
+ * @author : Guillaume RISCH 
+ * @author : Ousama LOURGUI
+ * @author : Haitam FERTOUT
  *  @name : templateC.php
  *  
  *  @brief :  Example controller pages
