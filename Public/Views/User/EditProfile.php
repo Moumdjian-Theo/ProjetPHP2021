@@ -27,13 +27,13 @@ ob_start();
                     <label>Mail :</label>
                     <input type="text" name="newEMail"  />
                 </div>
-                <input type="submit" name="action" value="Modifier l'email" /><br /><br />
+                <input type="submit" name="action" value="Modifier le mail" /><br /><br />
             </div>
 
             <div class="pwd">
                 <div class="inputT">
                     <label>Mot de passe :</label>
-                    <input type="password" name="newPwd" /><br /><br />                
+                    <input type="password" name="newPwd" /><br /><br />
                 </div>
                 <div class="inputT">
                     <label>Confirmation - mot de passe :</label>
@@ -53,14 +53,5 @@ ob_start();
 
 <?php
     $content = ob_get_clean();
-
-    if($_SESSION['user']->getRole() == 2)
-    {
-        require_once __DIR__.'/../templateadmin.php';
-    }
-    else 
-    {
-        require_once __DIR__.'/../templateConnected.php';
-    }
-
+    require_once DIR.'/../templateConnected.php';
 ?>
