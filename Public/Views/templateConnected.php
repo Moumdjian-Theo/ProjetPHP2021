@@ -36,7 +36,7 @@
         <div class="nav-items">
             <li><a href="/projetphp2021/accueil">Acceuil</a></li>
             <li><a href="./Donate">Donations</a></li>
-            <li><a href="./EditProfil">Profil</a></li>
+            <li><a href="./EditProfile">Profil</a></li>
             <li><a href="./Deconnexion"> Se déconnecter</a></li>
         </div>
         <div class="search-icon">

@@ -106,72 +106,83 @@ public function signUp()
 
     public function editProfile()
     {
-        if(!empty($_POST))
+        if(isset($_SESSION))
         {
-            if(isset($_POST['action']))
+            if(isset($_SESSION['user']))
             {
-                if($_POST['action'] == 'Modifier le pseudo'&& isset($_POST['newPseudo']) && !empty($_POST['newPseudo'])
-                && $_POST['newPseudo'] != $_SESSION['user']->getPseudo())
+                if(!empty($_POST))
                 {
-    
-                    User::updatePseudo($_POST['newPseudo'], $_SESSION['user']->getId());
-    
-                    $_SESSION['user'] ->setPseudo($_POST['newPseudo']);
-    
-                    $_SESSION['popup'] = new PopUp('success', 'Votre pseudo a bien été modifié.');
-                    header('location: /projetphp2021/editprofile');
-    
-    
-                    exit();
-    
-                }
-                
-                
-            }
-            if ($_POST['action'] == 'Modifier le mail' && isset($_POST['newEMail']) && !empty($_POST['newEMail'])) 
-            {
-    
-                if (!filter_var($_POST['newEMail'], FILTER_VALIDATE_EMAIL)) 
-                {
-                    $_SESSION['popup'] = new PopUp('error', 'Veuillez saisir un mail valide.');
-                    header('location: /projetphp2021/editprofile');
-                    exit();
-                }
-    
-                    User::updateMail($_POST['newEMail'], $_SESSION['user']->getUser_id());
-    
-    
-                    $_SESSION['popup'] = new PopUp('success', 'Le mail a bien été modifiée.');
-                    header('location: /projetphp2021/editprofile');
-                    exit();
-                
-            
-                if ($_POST['action'] == 'Modifier le mot de passe' && isset($_POST['newPwd'], $_POST['pwdVerif'])
-                && !empty($_POST['newPwd']) && !empty($_POST['pwdVerif'])) 
-                {
-    
-                    if ($_POST['newPwd'] != $_POST['pwdVerif']) 
+                    if(isset($_POST['action']))
                     {
-                        $_SESSION['popup'] = new PopUp('error', 'Les mots de passe ne sont pas identiques.');
-    
+                        if($_POST['action'] == 'Modifier le pseudo'&& isset($_POST['newPseudo']) && !empty($_POST['newPseudo'])
+                        && $_POST['newPseudo'] != $_SESSION['user']->getPseudo())
+                        {
+            
+                            User::updatePseudo($_POST['newPseudo'], $_SESSION['user']->getId());
+            
+                            $_SESSION['user'] ->setPseudo($_POST['newPseudo']);
+            
+                            $_SESSION['popup'] = new PopUp('success', 'Votre pseudo a bien été modifié.');
+                            header('location: /projetphp2021/editprofile');
+            
+            
+                            exit();
+            
+                        }
                         
-                        header('location: /projetphp2021/editprofile');
-                        exit;
+                        
                     }
-    
-                    $cryptedPwd = password_hash($_POST['newPwd'], PASSWORD_BCRYPT);
-                    User::updatePassword($cryptedPwd, $_SESSION['user']->getId());
-    
-                    $_SESSION['user'] ->setPassword($cryptedPwd);
-    
-                    $_SESSION['popup'] = new PopUp('success', 'Le mot de passe a bien été modifié.');
-                    header('location: /projetphp2021/editprofile');
-                    exit();
+                    if ($_POST['action'] == 'Modifier le mail' && isset($_POST['newEMail']) && !empty($_POST['newEMail'])) 
+                    {
+            
+                        if (!filter_var($_POST['newEMail'], FILTER_VALIDATE_EMAIL)) 
+                        {
+                            $_SESSION['popup'] = new PopUp('error', 'Veuillez saisir un mail valide.');
+                            header('location: /projetphp2021/editprofile');
+                            exit();
+                        }
+            
+                            User::updateMail($_POST['newEMail'], $_SESSION['user']->getUser_id());
+            
+            
+                            $_SESSION['popup'] = new PopUp('success', 'Le mail a bien été modifiée.');
+                            header('location: /projetphp2021/editprofile');
+                            exit();
+                        
+                    
+                        if ($_POST['action'] == 'Modifier le mot de passe' && isset($_POST['newPwd'], $_POST['pwdVerif'])
+                        && !empty($_POST['newPwd']) && !empty($_POST['pwdVerif'])) 
+                        {
+            
+                            if ($_POST['newPwd'] != $_POST['pwdVerif']) 
+                            {
+                                $_SESSION['popup'] = new PopUp('error', 'Les mots de passe ne sont pas identiques.');
+            
+                                
+                                header('location: /projetphp2021/editprofile');
+                                exit;
+                            }
+            
+                            $cryptedPwd = password_hash($_POST['newPwd'], PASSWORD_BCRYPT);
+                            User::updatePassword($cryptedPwd, $_SESSION['user']->getId());
+            
+                            $_SESSION['user'] ->setPassword($cryptedPwd);
+            
+                            $_SESSION['popup'] = new PopUp('success', 'Le mot de passe a bien été modifié.');
+                            header('location: /projetphp2021/editprofile');
+                            exit();
+                        }
+            
+                    }
                 }
-    
+                View::render('User/EditProfile', []);
+            }
+            else 
+            {
+                header('location: /projetphp2021/signin');
+                exit;
             }
         }
-        View::render('User/EditProfile', []);
     }
         
 

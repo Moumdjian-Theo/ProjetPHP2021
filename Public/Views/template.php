@@ -34,7 +34,6 @@
         <div class="nav-items">
             <li><a href="/projetphp2021/accueil">Acceuil</a></li>
             <li><a href="./Donate">Donations</a></li>
-            <li><a href="./EditProfil">Profil</a></li>
             <li><a href="./SignUp">Inscription</a></li>
             <li><a href="./SignIn">Connexion</a></li>
         </div>

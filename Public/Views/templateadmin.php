@@ -36,6 +36,7 @@
         <div class="nav-items">
             <li><a href="./Accueil">Acceuil</a></li>
             <li><a href="./CreatePost"> Créér un post </a></li>
+            <li><a href="./EditProfile">Profil</a></li>
             <li><a href="./Admin">Admin</a></li>
             <li><a href="./Deconnexion">Se déconnecter </a></li>
             
