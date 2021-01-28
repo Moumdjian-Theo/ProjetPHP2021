@@ -29,9 +29,6 @@ class User extends Model{
         $this->role = $role;
 
     }
-
-
-
     
     static function isMailExist($email) {
         $DB = static::DBConnect();

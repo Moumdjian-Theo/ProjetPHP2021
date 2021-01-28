@@ -1,0 +1,37 @@
+
+
+.content{
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.MainContent {
+
+    max-width: 500px;
+    min-width: 320px;
+    width: 100vw;
+    padding-top: 25px;
+    padding-bottom: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #77B5FE;
+    border-radius: 10px;
+    position: fixed;
+
+}
+
+h1 {
+    margin-top : 20px;
+    margin-bottom : 20px;
+    text-align: center;
+    color: white;
+    
+}
+
+.blockoPayBtn{
+    margin-left: 100px;
+    
+}

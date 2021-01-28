@@ -30,6 +30,10 @@ $Router->add('/projetphp2021/deletepost.php',['controller' =>'AdminC@deletePost'
 $Router->add('/projetphp2021/deconnexion',['controller' =>'UserC@deconnexion']);
 $Router->add('/projetphp2021/editprofile',['controller' =>'UserC@EditProfile']);
 $Router->add('/projetphp2021/createpost',['controller' =>'PostC@CreatePost']);
+$Router->add('/projetphp2021/searchpost',['controller' =>'SearchC@SearchPost']);
+$Router->add('/projetphp2021/incrementer.php',['controller' =>'PostC@incrementer']);
+$Router->add('/projetphp2021/donnation',['controller' =>'DonnationC@DisplayPage']);
+
 
 
 /**

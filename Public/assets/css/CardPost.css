@@ -20,8 +20,6 @@
     
 }
 
-
-
 .textPosition{
     padding: 0 20px 35px;
     width: auto;
@@ -51,8 +49,16 @@
     display: flex;
     cursor: pointer;
     flex-wrap: wrap;
+
     
    
+}
+
+.buttonEmoji
+{
+    background-color:rgb(218, 238, 255);
+    border-color: rgb(218, 238, 255);
+    border-radius:5px;
 }
 
 
@@ -109,6 +115,3 @@
     margin-left: 5px;
 }
 
-.tags{
-    font-weight: bold;
-}

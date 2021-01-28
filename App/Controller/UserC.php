@@ -6,9 +6,7 @@
 
 require_once __DIR__.'/../../Core/PopUp.php';
 
-require_once __DIR__.'/../Model/User.php';
-
-require_once __DIR__.'/../../Core/Mail.php';
+require_once (__DIR__.'/../Model/User.php');
 
 session_start();
 
@@ -38,7 +36,7 @@ public function signUp()
                 exit;
             }
 
-           
+
 
             if (empty($_POST['passwordInput']) || empty($_POST['RpasswordInput']) || $_POST['passwordInput'] != $_POST['RpasswordInput']) {
                 $_SESSION['popup'] = new PopUp('error', 'Les mots de passe ne sont pas identiques.');
@@ -51,23 +49,18 @@ public function signUp()
 
             // insertion dans la base de données
             $userId = User::registerUser($_POST['mailInput'], $cryptedPwd,$_POST['usernameInput']);
-
             $mail = new Mail;
             $mail->sendMail(['email' => $_POST['mailInput'], 'pseudo' => $_POST['usernameInput']], 'Merci de votre inscription', ['confirmationAccount']); 
-            
-            
-            
+
             $_SESSION['popup'] = new PopUp('success', 'Votre compte a bien été créé, vérifier vos mails.');
             header('location: /projetphp2021/SignUp');
             exit;
-
-            
-
         }
 
         View::render('User/SignUp', []);
 
     } 
+
     public function signIn()
     {
 

@@ -33,7 +33,7 @@ ob_start();
             <div class="pwd">
                 <div class="inputT">
                     <label>Mot de passe :</label>
-                    <input type="password" name="newPwd" /><br /><br />                
+                    <input type="password" name="newPwd" /><br /><br />
                 </div>
                 <div class="inputT">
                     <label>Confirmation - mot de passe :</label>

@@ -18,8 +18,17 @@
 ?>
 
 <main>
-  
-  <?php 
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/b18ab37082.js" crossorigin="anonymous"></script>
+        <title>Acceuil</title>
+    </head>
+    <body>
+
+ <?php 
     foreach($postlist as $post)
     {
         echo "<div class=\"Container\">";
@@ -29,8 +38,6 @@
         echo "<div class=\"title\">".$post->getTitle()."</div>";
         echo "<img src=".$post->getPicture()." class=\"img\"/>";
         echo "<div class=\"text\">".$post->getBody()."</div>";
-        echo "<div class=\"tags\">".$post->getTag()."</div>";
-
         echo "<div class=\"buttonContainer\">"; 
         echo "<i class=\"far fa-kiss-wink-heart\"></i>";
         echo "<span class=\"number\">".$post->getLove()."</span>";
@@ -48,7 +55,9 @@
         </div>";
     }
 ?>
-</main>
+</body>
+</html>
+
 
 
 

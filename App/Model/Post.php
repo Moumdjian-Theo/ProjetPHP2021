@@ -26,16 +26,16 @@ class Post extends Model {
     
     
 
-    function __construct($id,$user_id,$title,$picture, $body,$date,$love,$cute,$trop_stylé,$swag,$tag){
+    function __construct($id,$user_id,$title,$picture, $body,$date,$cute,$trop_stylé,$love,$swag,$tag){
         $this->id = $id;
         $this->user_id = $user_id;
         $this->title = $title;
         $this->picture = $picture;
         $this->body = $body;
         $this->date = $date;
-        $this->love = $love;
         $this->cute = $cute;
         $this->trop_stylé = $trop_stylé;
+        $this->love = $love;
         $this->swag = $swag;
         $this->tag = $tag;
     }
@@ -124,48 +124,84 @@ class Post extends Model {
         $this->tag = $tag;
     }
 
-    public function insertStylishUser($id_post)
+    public static function insertSwagUser($id_user,$id_post)
     {
         $DB = static::DBConnect();
 
-        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,stylish)');
-        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`typeR`,`id_user`,`id_post`) VALUES (?,?,?)');
+        $request_stylish->execute(['swag',$id_user,$id_post]);
+
+        return;
+
+    }
+    public static function insertTrop_StyléUser($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`typeR`,`id_user`,`id_post`) VALUES (?,?,?)');
+        $request_stylish->execute(['trop_stylé',$id_user,$id_post]);
 
         return;
 
     }
 
-    public function insertCuteUser($id_post)
+    public static function insertCuteUser($id_user,$id_post)
     {
         $DB = static::DBConnect();
 
-        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,cute)');
-        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`typeR`,`id_user`,`id_post`) VALUES (?,?,?)');
+        $request_stylish->execute(['cute',$id_user,$id_post]);
 
         return;
 
     }
 
-    public function insertSwagUser($id_post)
+    public static function insertLoveUser($id_user,$id_post)
     {
         $DB = static::DBConnect();
 
-        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,swag)');
-        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`typeR`,`id_user`,`id_post`) VALUES (?,?,?)');
+        $request_stylish->execute(['love',$id_user,$id_post]);
 
         return;
 
     }
 
-    public function insertLoveUser($id_post)
+    public static function incrementLove($id_post)
     {
-        $DB = static::DBConnect();
+        $DB =static::DBConnect();
 
-        $request_stylish = $DB ->prepare('INSERT INTO `reaction` (`id_user`,`id_post`,`typeR`) VALUES (?,?,Love)');
-        $request_stylish->execute([$_SESSION['id_user']],$id_post);
+        $request_increment = $DB->prepare('UPDATE `post` SET `love` = love + 1 WHERE `id` = ?');
+        $request_increment->execute([$id_post]);
 
         return;
+    }
+    public static function incrementCute($id_post)
+    {
+        $DB =static::DBConnect();
 
+        $request_increment = $DB->prepare('UPDATE `post` SET `cute` = cute + 1 WHERE `id` = ?');
+        $request_increment->execute([$id_post]);
+
+        return;
+    }
+    public static function incrementTrop_Stylé($id_post)
+    {
+        $DB =static::DBConnect();
+
+        $request_increment = $DB->prepare('UPDATE `post` SET `trop_stylé` = trop_stylé + 1 WHERE `id` = ?');
+        $request_increment->execute([$id_post]);
+
+        return;
+    }
+    public static function incrementSwag($id_post)
+    {
+        $DB =static::DBConnect();
+
+        $request_increment = $DB->prepare('UPDATE `post` SET `swag` = swag + 1 WHERE `id` = ?');
+        $request_increment->execute([$id_post]);
+
+        return;
     }
 
 
@@ -179,12 +215,13 @@ class Post extends Model {
                                                              `picture`,
                                                              `body`,
                                                              `date`,
-                                                             `swag`, 
-                                                             `love`,
                                                              `cute`,
-                                                             `trop_stylé`,`tag`)
+                                                             `trop_stylé`,
+                                                             `love`,
+                                                             `swag`, 
+                                                             `tag`)
                                         VALUES (? , ?, ? , ? , ? ,?,?,?,?,?)');
-        $request_newpost->execute ([$user_id,$title,$picture, $text, $date, $swag, $love, $cute, $stylish,$tag]);
+        $request_newpost->execute ([$user_id,$title,$picture, $text, $date, $cute, $stylish, $love, $swag,$tag]);
         return $DB->lastInsertId();
 
     }
@@ -210,10 +247,10 @@ class Post extends Model {
             $response[$i]['picture'],
             $response[$i]['body'],
             $response[$i]['date'],
-            $response[$i]['swag'],
-            $response[$i]['love'],
             $response[$i]['cute'],
             $response[$i]['trop_stylé'],
+            $response[$i]['love'],
+            $response[$i]['swag'],
             $response[$i]['tag']);
 
         
@@ -224,7 +261,7 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_post = $DB->prepare('SELECT * FROM `post`');
+        $request_post = $DB->prepare('SELECT * FROM `post` ORDER BY `date` DESC');
         $request_post->execute();
 
         $response = $request_post->fetchAll();
@@ -245,10 +282,10 @@ class Post extends Model {
                 $response[$i]['picture'],
                 $response[$i]['body'],
                 $response[$i]['date'],
-                $response[$i]['swag'],
-                $response[$i]['love'],
                 $response[$i]['cute'],
                 $response[$i]['trop_stylé'],
+                $response[$i]['love'],
+                $response[$i]['swag'],
                 $response[$i]['tag']));
         }
         return $listPost;
@@ -258,8 +295,8 @@ class Post extends Model {
     {
         $DB = static::DBConnect();
 
-        $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` = ? ');
-        $request_tag->execute([$tag]);
+        $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` LIKE ? ');
+        $request_tag->execute(["%".$tag."%"]);
         $response = $request_tag->fetchaAll();
 
         if(sizeof($response) == 0)
@@ -278,10 +315,10 @@ class Post extends Model {
                 $response[$i]['picture'],
                 $response[$i]['body'],
                 $response[$i]['date'],
-                $response[$i]['swag'],
-                $response[$i]['love'],
                 $response[$i]['cute'],
                 $response[$i]['trop_stylé'],
+                $response[$i]['love'],
+                $response[$i]['swag'],
                 $response[$i]['tag'])
                          
             );
@@ -291,21 +328,12 @@ class Post extends Model {
         
     }
 
-    public static function addNewTag($tag)
-    {
-        $DB = static::DBConnect();
-
-        $request_addtag = $DB->prepare('INSERT INTO `post` (`tag`) VALUES (?)');
-        $request_addtag->execute([$tag]);
-        return;
-    }
-
     public static function searchPostByText($text)
     {
         $DB = static::DBConnect();
 
-        $request_text = $DB->prepare('SELECT * FROM `post` WHERE `text` LIKE `%?%`');
-        $request_text->execute([$text]);
+        $request_text = $DB->prepare("SELECT * FROM `post` WHERE `body` LIKE ?");
+        $request_text->execute(["%".$text."%"]);
 
         $response = $request_text->fetchAll();
 
@@ -318,7 +346,7 @@ class Post extends Model {
 
         $listPost = [];
 
-        for($i = 0; $i < sizeof($result); ++$i)
+        for($i = 0; $i < sizeof($response); ++$i)
         {
             array_push($listPost, new Post (
                 $response[$i]['id'],
@@ -327,15 +355,27 @@ class Post extends Model {
                 $response[$i]['picture'],
                 $response[$i]['body'],
                 $response[$i]['date'],
-                $response[$i]['swag'],
-                $response[$i]['love'],
                 $response[$i]['cute'],
                 $response[$i]['trop_stylé'],
+                $response[$i]['love'],
+                $response[$i]['swag'],
                 $response[$i]['tag']
                 )         
             );
         }
+        return $listPost;
     }
+
+    public static function addNewTag($tag)
+    {
+        $DB = static::DBConnect();
+
+        $request_addtag = $DB->prepare('INSERT INTO `post` (`tag`) VALUES (?)');
+        $request_addtag->execute([$tag]);
+        return;
+    }
+
+
 
     public static function deletePost($id_post)
     {
@@ -355,5 +395,54 @@ class Post extends Model {
         $count = $request_post->fetchColumn();
         return $count;
     }
+
+    public static function isInserted($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+        $request_user = $DB->prepare("SELECT * FROM `reaction` WHERE `id_user` = ? and `id_post`= ?");
+        $request_user->execute([$id_user,$id_post]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+
+    public static function isInsertedCute($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_user = $DB->prepare('SELECT * FROM `reaction` WHERE `id_post` = ? AND `id_user` = ? AND `typeR` = ?');
+        $request_user->execute([$id_user,$id_post,"cute"]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+
+    public static function isInsertedSwag($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_user = $DB->prepare('SELECT * FROM `reaction` WHERE `id_post` = ? AND `id_user` = ? AND `typeR` = ?');
+        $request_user->execute([$id_user,$id_post,"swag"]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+
+    public static function isInsertedStylish($id_user,$id_post)
+    {
+        $DB = static::DBConnect();
+
+        $request_user = $DB->prepare('SELECT * FROM `reaction` WHERE `id_post` = ? AND `id_user` = ? AND `typeR` = ?');
+        $request_user->execute([$id_user,$id_post,"cute"]);
+        $response = $request_user->fetchAll();
+
+        if(sizeof($response) == 0) return false;
+        return true;
+    }
+    
+    
     
 }

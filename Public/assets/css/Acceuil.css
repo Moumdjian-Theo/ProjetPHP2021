@@ -78,6 +78,7 @@ nav form .search-data{
     border: none;
     font-weight: 500;
     background: none;
+    border-radius:5px;
 }
 
 nav form button{
@@ -110,6 +111,8 @@ nav .cancel-icon,
 nav .search-icon{
     display: none;
 }
+
+
 
 @media (max-width: 1245px){
     nav{

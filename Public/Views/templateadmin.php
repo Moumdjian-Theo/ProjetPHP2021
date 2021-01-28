@@ -36,6 +36,7 @@
         <div class="nav-items">
             <li><a href="./Accueil">Acceuil</a></li>
             <li><a href="./CreatePost"> Créér un post </a></li>
+            <li><a href="./EditProfile">Profil</a></li>
             <li><a href="./Admin">Admin</a></li>
             <li><a href="./Deconnexion">Se déconnecter </a></li>
             
@@ -46,9 +47,9 @@
         <div class="cancel-icon">
             <span class="fas fa-times"></span>
         </div>
-        <form action="#">
-            <input type="search" class="search-data" placeholder="Rechercher" required>
-            <button type="submit" class="fas fa-search"></button>
+        <form method="post" action="/projetphp2021/searchpost">
+            <input type="search" name ="search-data" class="search-data" placeholder="Rechercher" required>
+            <button type="submit" name ="searchsubmit"class="fas fa-search"></button>
         </form>
     </nav>
 

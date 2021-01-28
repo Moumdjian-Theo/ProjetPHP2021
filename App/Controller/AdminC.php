@@ -34,7 +34,7 @@ session_start();
      */
     public function verificateRole() {
 
-        if(isset($_SESSION))
+        if(isset($_SESSION['user']))
         {
             if($_SESSION['user']->getRole() ==  '2')
             {

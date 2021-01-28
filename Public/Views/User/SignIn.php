@@ -41,7 +41,7 @@ ob_start();
 
     </form>
     
-    <p><a class="link" href="Public\Views\User\SignUp.php">Pas de compte ? s'inscrire</a></p>
+    <p><a class="link" href="SignUp.php">Pas de compte ? s'inscrire</a></p>
     <p><a class="link" href="SignUp.php">Mot de passe oublié ?</a></p>
     
 </main>
