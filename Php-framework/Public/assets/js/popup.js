@@ -7,13 +7,11 @@
  */
 
 
-
 let Popups = document.querySelectorAll('.popup');
 
 for (var i = 0; i < Popups.length; ++i) {
     setTimeout(deletePopUp, 10000, Popups[i]);
 }
-
 
 
 /**
