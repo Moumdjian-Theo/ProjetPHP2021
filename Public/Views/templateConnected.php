@@ -46,6 +46,7 @@ if (isset($_SESSION['user']))
             <li><a href="./Donation">Donations</a></li>
             <li><a href="./EditProfile">Profil</a></li>
             <li><a href="./Deconnexion"> Se déconnecter</a></li>
+            <li> <a href=""> <?php echo $_SESSION['user']->getPseudo(); ?> </a> </li>
         </div>
         <div class="search-icon">
             <span class="fa fa-search"></span>
