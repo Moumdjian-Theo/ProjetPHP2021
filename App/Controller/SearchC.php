@@ -38,14 +38,15 @@ session_start();
         {
             if(isset($_POST['search-data']))
             {
-                if($_SESSION['user']->getRole() == 2)
+                if($_POST['search-data'][0]== 'β')
                 {
-                    $listPost = Post::searchPostByText($_POST['search-data']);
+                    
+                    $listPost = Post::searchPostByTag($_POST['search-data']);
                     View::render('Accueil/AccueilVannestarre', ['postlist' => $listPost]);     
                 }
                 else
                 {
-                    $listPost = Post::searchPostByText($_POST['search-data']);
+                    $listPost = Post::searchPostByTag($_POST['search-data']);
                     View::render('Accueil/Accueil', ['postlist' => $listPost]);
                 }
             }
@@ -62,6 +63,6 @@ session_start();
             exit;
         }
 
-    }// public function createCar()
+    }
 
 }

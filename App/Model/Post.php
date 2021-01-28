@@ -347,7 +347,7 @@ class Post extends Model {
 
         $request_tag = $DB->prepare('SELECT * FROM `post` WHERE `tag` LIKE ? ');
         $request_tag->execute(["%".$tag."%"]);
-        $response = $request_tag->fetchaAll();
+        $response = $request_tag->fetchAll();
 
         if(sizeof($response) == 0)
         {
@@ -356,7 +356,7 @@ class Post extends Model {
 
         $listPost = [];
 
-        for($i = 0; $i < sizeof($result); ++$i)
+        for($i = 0; $i < sizeof($response); ++$i)
         {
             array_push($listPost, new Post (
                 $response[$i]['id'],

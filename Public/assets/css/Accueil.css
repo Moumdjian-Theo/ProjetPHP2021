@@ -223,3 +223,17 @@ nav .search-icon{
     }
 
 }
+footer {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 75px;
+    width: 200px;
+    background-color: #77b5fe;
+    text-align: center;
+
+}
+
+.pseudo{
+    color: white;      
+}
