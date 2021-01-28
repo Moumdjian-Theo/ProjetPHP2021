@@ -331,7 +331,7 @@ class Post extends Model {
                 $response[$i]['love'],
                 $response[$i]['cute'],
                 $response[$i]['trop_stylé'],
-                $response[$i]['tag'],
+                $response[$i]['tag']
                 )         
             );
         }

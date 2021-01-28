@@ -27,7 +27,7 @@ ob_start();
                     <label>Mail :</label>
                     <input type="text" name="newEMail"  />
                 </div>
-                <input type="submit" name="action" value="Modifier l'email" /><br /><br />
+                <input type="submit" name="action" value="Modifier le mail" /><br /><br />
             </div>
 
             <div class="pwd">

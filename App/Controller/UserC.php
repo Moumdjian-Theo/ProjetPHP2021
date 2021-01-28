@@ -6,7 +6,9 @@
 
 require_once __DIR__.'/../../Core/PopUp.php';
 
-require_once (__DIR__.'/../Model/User.php');
+require_once __DIR__.'/../Model/User.php';
+
+require_once __DIR__.'/../../Core/Mail.php';
 
 session_start();
 
@@ -36,7 +38,7 @@ public function signUp()
                 exit;
             }
 
-
+           
 
             if (empty($_POST['passwordInput']) || empty($_POST['RpasswordInput']) || $_POST['passwordInput'] != $_POST['RpasswordInput']) {
                 $_SESSION['popup'] = new PopUp('error', 'Les mots de passe ne sont pas identiques.');
@@ -50,10 +52,16 @@ public function signUp()
             // insertion dans la base de données
             $userId = User::registerUser($_POST['mailInput'], $cryptedPwd,$_POST['usernameInput']);
 
+            $mail = new Mail;
+            $mail->sendMail(['email' => $_POST['mailInput'], 'pseudo' => $_POST['usernameInput']], 'Merci de votre inscription', ['confirmationAccount']); 
             
-            $_SESSION['popup'] = new PopUp('success', 'Votre compte a bien été créé, mais il n\'est pas encore actif. Pour l\'activer, veuillez vérifier vos mails.');
+            
+            
+            $_SESSION['popup'] = new PopUp('success', 'Votre compte a bien été créé, vérifier vos mails.');
             header('location: /projetphp2021/SignUp');
             exit;
+
+            
 
         }
 
@@ -120,8 +128,6 @@ public function signUp()
     
                     $_SESSION['popup'] = new PopUp('success', 'Votre pseudo a bien été modifié.');
                     header('location: /projetphp2021/editprofile');
-    
-    
                     exit();
     
                 }
@@ -138,16 +144,15 @@ public function signUp()
                     exit();
                 }
     
-                    User::updateMail($_POST['newEMail'], $_SESSION['user']->getUser_id());
+                    User::updateMail($_POST['newEMail'], $_SESSION['user']->getId());
     
     
                     $_SESSION['popup'] = new PopUp('success', 'Le mail a bien été modifiée.');
                     header('location: /projetphp2021/editprofile');
                     exit();
-                
+            }
             
-                if ($_POST['action'] == 'Modifier le mot de passe' && isset($_POST['newPwd'], $_POST['pwdVerif'])
-                && !empty($_POST['newPwd']) && !empty($_POST['pwdVerif'])) 
+                if ($_POST['action'] == 'Modifier le mot de passe' && !empty($_POST['newPwd']) && !empty($_POST['pwdVerif'])) 
                 {
     
                     if ($_POST['newPwd'] != $_POST['pwdVerif']) 
@@ -169,9 +174,9 @@ public function signUp()
                     exit();
                 }
     
-            }
+            
         }
-        View::render('User/EditProfile', []);
+        View::render('User/EditProfile',[]);
     }
         
 

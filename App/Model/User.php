@@ -142,7 +142,7 @@ class User extends Model{
     {
         $DB = static::DBConnect();
         $stmt = $DB->prepare('UPDATE `user` SET `Email` = ? WHERE `id` = ?');
-        $stmt->execute([$newemail, $id]);
+        $stmt->execute([$newEmail, $id]);
 
         return;
     }

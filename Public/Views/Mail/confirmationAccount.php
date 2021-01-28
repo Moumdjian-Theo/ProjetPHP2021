@@ -1,6 +1,4 @@
-<?php
-    
-    
+<?php 
     ob_start();
 ?>
 
@@ -94,23 +92,20 @@
 <body>    
     <main>
         <div class="LogoContainer">
-            <img src="https://cdn.discordapp.com/attachments/710107549097263104/710108178951569498/amouvLogoBlack.png" class="logo" alt="AmouvLogo">
+            <img src="https://media.discordapp.net/attachments/785412538833436692/801053910562635776/unknown.png" class="logo" alt="Vanestarre">
         </div>
 
         <div class="maintext">
-            Votre compte a bien été créé, cependant, il n'est pas encore actif. Pour l'activer, veuillez cliquer sur le lien ci-dessous.
+            Votre compte a bien été créé.
         
         </div>
-
-        <div class="buttonContainer">
-            <a href="localhost/AMOUV/validation?code=<?=$message['var']?>" class="activateAccount">Activer mon compte</a>
-        </div>
-
+    
 
         <div class="complMEssage">
             Si vous n'êtes pas à l'origine de ce mail, merci de supprimer ce mail.
         </div>
     </main>
+
 </body>
 </html>
 
