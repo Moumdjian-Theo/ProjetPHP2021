@@ -53,5 +53,5 @@ ob_start();
 
 <?php
     $content = ob_get_clean();
-    require_once DIR.'/../templateConnected.php';
+    require_once __DIR__.'/../templateConnected.php';
 ?>
