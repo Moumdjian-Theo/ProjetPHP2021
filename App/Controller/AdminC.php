@@ -73,6 +73,7 @@ session_start();
                 {
                     $id = $_GET['id'];
                     $_SESSION['user']->deleteUser($id);
+                    $_SESSION['popup'] = new PopUp('success', 'utilisateur supprimé.');
                     header('location: /projetphp2021/admin');
                     exit;
                 }
@@ -112,6 +113,7 @@ session_start();
                         if(isset($role))
                         {
                             $_SESSION['user']->editRole($id,$role);
+                            $_SESSION['popup'] = new PopUp('success', 'Role mis à jour.');
                             header('location: /projetphp2021/admin');
                             exit;
                         }
@@ -148,6 +150,7 @@ session_start();
                     if(isset($_GET['id']))
                     {
                         Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']);
+                        $_SESSION['popup'] = new PopUp('success', 'nombres de loves modifiés .');
                         header('location: /projetphp2021/admin');
                         exit();
                     }
@@ -181,6 +184,7 @@ session_start();
                 {
                     $id_post=$_GET['id'];
                     Post::deletePost($id_post);
+                    $_SESSION['popup'] = new PopUp('success', 'Poste supprimé.');
                     header('location: /projetphp2021/admin');
                     exit;
                 }
