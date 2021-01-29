@@ -37,6 +37,7 @@ class Router {
         if (!array_key_exists($this->getURL(), $this->routes)) {
 
             var_dump('TODO : REDIRECT TO 404 PAGE');
+            
             die();
 
         }
