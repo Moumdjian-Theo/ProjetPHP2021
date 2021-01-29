@@ -3,15 +3,15 @@
 # ######################################################################
  
 
-#Auteurs:
-###MOUMDJIAN Théo
-###RISCH Guillaume
-###FERTOUT Haïtam
-###LOURGUI Oussama
-###Organisation : IUT AIX MARSEILLE, IUT d’Aix en Provence, 413 Avenue Gaston Berger, 13100 Aix-en-Provence.
+# Auteurs:
+### MOUMDJIAN Théo
+### RISCH Guillaume
+### FERTOUT Haïtam
+### LOURGUI Oussama
+### Organisation : IUT AIX MARSEILLE, IUT d’Aix en Provence, 413 Avenue Gaston Berger, 13100 Aix-en-Provence.
  
 
-#Identifiants :
+# Identifiants :
 ## ALWAYSDATA:
 ### mail : vanestarrephps3@gmail.com
 ### mdp : toinoulamachine
