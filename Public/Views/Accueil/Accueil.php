@@ -22,12 +22,12 @@
         echo "<span class=\"date\">".$post->getDate()."</span>";
         echo "<div class=\"title\">".$post->getTitle()."</div>";
         if (strlen($post->getPicture()) != 0) {
-            echo "<img src=\"/projetphp2021/Public/assets/imgs/".$post->getPicture()."\"class=\"img\">";
+            echo "<img src=\"/Public/assets/imgs/".$post->getPicture()."\"class=\"img\">";
         }           
         echo "<div class=\"text\">".$post->getBody()."</div>";
         echo "<div class=\"tags\">".$post->getTag()."</div>";
         
-        echo "<form method=\"post\" action=\"/projetphp2021/incrementer.php?id=".$post->getId()."\">";
+        echo "<form method=\"post\" action=\"/incrementer.php?id=".$post->getId()."\">";
         echo "<div class=\"buttonContainer\">"; 
         echo "<button name=\"button1\" type=\"submit\" class=\"buttonEmoji\"> <i class=\"far fa-kiss-wink-heart\"></i>";
         echo "<span class=\"number\">".$post->getCute()."</span> </button>";

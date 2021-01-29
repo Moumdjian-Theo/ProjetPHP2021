@@ -1,6 +1,6 @@
 <?php
 
-$listStyles = ['createpost'];
+$listStyles = ['CreatePost'];
 $listJS = [''];
 
 ob_start();

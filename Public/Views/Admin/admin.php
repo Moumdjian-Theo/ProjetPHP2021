@@ -34,7 +34,7 @@ ob_start();
                 foreach($userlist as $user)
                 {
                     echo "<tr>";
-                    echo "<form method=\"post\" action=\"/projetphp2021/edit/edituser.php?id=".$user->getId()."\">";
+                    echo "<form method=\"post\" action=\"/edit/edituser.php?id=".$user->getId()."\">";
                     echo "<td>".$user->getId()."</td>";
                     echo "<td>".$user->getPseudo()."</td>";
                     echo "<td>".$user->getMail()."</td>";
@@ -48,14 +48,10 @@ ob_start();
                                 </select>";
 
                     echo "<td> <input type=\"submit\" value=\"Edit\"/> </td>";
-                    echo "<td> <a href=\"/projetphp2021/delete/deleteUser.php?id=".$user->getId()."\"> Delete </a> </td>";
+                    echo "<td> <a href=\"/delete/deleteUser.php?id=".$user->getId()."\"> Delete </a> </td>";
                     echo "</form>";
                     echo "</tr>";
                 }
-            }
-            else 
-            {
-
             }
 
             ?>      
@@ -90,28 +86,24 @@ ob_start();
                     foreach($postlist as $post)
                     {
                         echo "<tr>";
-                        echo "<form method=\"post\" action=\"/projetphp2021/edit/editpost.php?id=".$post->getId()."\">";
+                        echo "<form method=\"post\" action=\"/edit/editpost.php?id=".$post->getId()."\">";
                         echo" <td>".$post->getId()."</td>";
                         echo "<td>".$post->getUser_id()."</td>";
-                        echo "<td>".$post->getTitle()."</td>";
+                        echo "<td> <input type=\"text\" maxlength=\"50\" name=\"title\" value=".$post->getTitle()."> </td>";
                         echo "<td>".$post->getPicture()."</td>";
-                        echo "<td>".$post->getBody()."</td>";
+                        echo "<td> <textarea type=\"text\" maxlength=\"50\" name=\"body\" >".$post->getBody()."</textarea></td>";
                         echo "<td>".$post->getDate()."</td>";
                         echo "<td>".$post->getLove()."</td>";
                         echo "<td>".$post->getCute()."</td>";
                         echo "<td>".$post->getTrop_Stylé()."</td>";
                         echo "<td>".$post->getSwag()."</td>";
                         echo "<td>".$post->getTag()."</td>";
-                        echo "<td> <input type = 'number' min='0' name=\"nbrlove\" value=".$post->getNbr()." </td>";
+                        echo "<td> <input type = 'number' min='0' name=\"nbrlove\" value=".$post->getNbr()."> </td>";
                         echo "<td> <input type=\"submit\" value=\"Edit\"/> </td>";
-                        echo "<td><a href=\"/projetphp2021/delete/deletePost.php?id=".$post->getId()."\"> Delete </a> </td>";
+                        echo "<td><a href=\"/delete/deletePost.php?id=".$post->getId()."\"> Delete </a> </td>";
                         echo "</tr>";
                         echo "</form>";
                     }
-                }
-                else 
-                {
-
                 }
 
                 ?>

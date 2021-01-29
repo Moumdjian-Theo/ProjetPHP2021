@@ -252,6 +252,23 @@ class Post extends Model {
         return;
     }
 
+    public static function updateBody($id_post,$text)
+    {
+        $DB = static::DBConnect();
+        $request_limit = $DB->prepare('UPDATE `post` SET `body` = ? WHERE `id` = ? ');
+        $request_limit->execute(["$text",$id_post]);
+
+        return;
+    }
+    public static function updateTitle($id_post,$title)
+    {
+        $DB = static::DBConnect();
+        $request_limit = $DB->prepare('UPDATE `post` SET `title` = ? WHERE `id` = ? ');
+        $request_limit->execute(["$title",$id_post]);
+
+        return;
+    }
+
 
     public static function insertNewPost($user_id, $title,$picture, $text, $date,$swag, $love, $cute, $stylish,$tag,$nbrMax)
     {

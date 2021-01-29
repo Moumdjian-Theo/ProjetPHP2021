@@ -30,7 +30,7 @@ class PostC {
                             Post::insertNewPost($_SESSION['user']->getId(),$_POST['title'],$_POST['img'],$_POST['text'],date("Y-m-d H:i:s"),0,0,0,0,$_POST['tag'],0);
 
                             $_SESSION['popup'] = new PopUp('success', 'Votre poste a bien été crée.');
-                    header('location: /projetphp2021/createpost');
+                    header('location: /createpost');
                             
                         }
                     }
@@ -43,7 +43,7 @@ class PostC {
         }
         else 
         {
-            header('location: /projetphp2021/signin');
+            header('location: /signin');
         }
     }
 
@@ -60,12 +60,12 @@ class PostC {
 
                         Post::incrementCute($_GET['id']);
                         Post::insertCuteUser($_SESSION['user']->getId(),$_GET['id']);
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
                     else
                     {
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
 
@@ -80,12 +80,12 @@ class PostC {
                     {
                         Post::incrementTrop_stylé($_GET['id']);
                         Post::insertTrop_styléUser($_SESSION['user']->getId(),$_GET['id']);
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
                     else
                     {
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
 
@@ -101,7 +101,7 @@ class PostC {
                         if(Post::isLoveLimit($_GET['id']))
                         {
                            
-                            header('location: /projetphp2021/donation');
+                            header('location: /donation');
                             exit();
                         }
                         Post::insertLoveUser($_SESSION['user']->getId(),$_GET['id']);
@@ -109,7 +109,7 @@ class PostC {
                     }
                     else
                     {
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
 
@@ -123,12 +123,12 @@ class PostC {
                     {
                         Post::incrementSwag($_GET['id']);
                         Post::insertSwagUser($_SESSION['user']->getId(),$_GET['id']);
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
                     else
                     {
-                        header('location: accueil');
+                        header('location: /accueil');
                         exit();
                     }
 

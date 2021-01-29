@@ -5,20 +5,10 @@
         unset($_SESSION['popup']);
     }
 
-    if(isset($_SESSION['user']))
-    {
-        $username = $_SESSION['user']->getPseudo();
-    }
 
 ?>
 
-<?php
 
-if (isset($_SESSION['user']))
-    {
-        $username = $_SESSION['user']->getPseudo();
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,17 +16,17 @@ if (isset($_SESSION['user']))
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/Accueil.css">
-    <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/popup.css">
-    <script src="/ProjetPHP2021/Public/assets/js/popup.js" defer></script>
+    <link rel="stylesheet" href="/Public/assets/css/Accueil.css">
+    <link rel="stylesheet" href="/Public/assets/css/popup.css">
+    <script src="/Public/assets/js/popup.js" defer></script>
     <script src="https://kit.fontawesome.com/b18ab37082.js" crossorigin="anonymous"></script>
     <?php foreach ($listStyles as $key => $value) { ?>
-        <link rel="stylesheet" href="/ProjetPHP2021/Public/assets/css/<?=$value?>.css">
+        <link rel="stylesheet" href="/Public/assets/css/<?=$value?>.css">
     <?php } ?>
     <?php foreach ($listJS as $key => $value) { ?>
-        <script src="/ProjetPHP2021/Public/assets/js/<?= $value ?>.js" defer></script>
+        <script src="/Public/assets/js/<?= $value ?>.js" defer></script>
     <?php } ?>
-    <script src="/ProjetPHP2021/Public/assets/js/Accueil.js"defer></script>
+    <script src="/Public/assets/js/Accueil.js"defer></script>
 </head>
 <body>
     <nav>
@@ -47,12 +37,12 @@ if (isset($_SESSION['user']))
         <div class="logo">Vanestarre</div>
         
         <div class="nav-items">
-            <li><a href="./Accueil">Accueil</a></li>
-            <li><a href="./CreatePost"> Créér un post </a></li>
-            <li><a href="./EditProfile">Profil</a></li>
-            <li><a href="./Admin">Admin</a></li>
-            <li><a href="./Deconnexion">Se déconnecter </a></li>
-            <li> <a href="#"> <?php echo $username ?> </a> </li>
+            <li><a href="/Accueil">Accueil</a></li>
+            <li><a href="/CreatePost"> Créér un post </a></li>
+            <li><a href="/EditProfile">Profil</a></li>
+            <li><a href="/Admin">Admin</a></li>
+            <li><a href="/Deconnexion">Se déconnecter </a></li>
+
             
         </div>
         <div class="search-icon">
@@ -61,7 +51,7 @@ if (isset($_SESSION['user']))
         <div class="cancel-icon">
             <span class="fas fa-times"></span>
         </div>
-        <form method="post" action="/projetphp2021/searchpost">
+        <form method="post" action="/searchpost">
             <input type="search" name ="search-data" class="search-data" placeholder="Rechercher" required>
             <button type="submit" name ="searchsubmit"class="fas fa-search"></button>
         </form>
@@ -74,7 +64,7 @@ if (isset($_SESSION['user']))
 
 <footer>
    
- <div class="pseudo"><?php echo $username ?></div> 
+ <div class="pseudo"><?php echo $_SESSION['user']->getPseudo() ?></div> 
 
 </footer>
 </html>

@@ -53,5 +53,13 @@ ob_start();
 
 <?php
     $content = ob_get_clean();
-    require_once __DIR__.'/../templateConnected.php';
+    if($_SESSION['user']->getRole()== 2)
+    {
+        require_once __DIR__.'/../templateadmin.php';
+    }
+    else
+    {
+        require_once __DIR__.'/../templateConnected.php';
+    }
+
 ?>

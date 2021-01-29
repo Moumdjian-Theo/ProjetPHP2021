@@ -10,13 +10,13 @@
 
 class Config {
 
-    const DB_HOST = 'localhost:3306';
+    const DB_HOST = 'mysql-vannestarrephps3.alwaysdata.net';
 
-    const DB_NAME = 'vanestarre_db';
+    const DB_NAME = 'vannestarrephps3_database';
 
-    const DB_USER = 'root';
+    const DB_USER = '225320';
 
-    const DB_PWD = '';
+    const DB_PWD = 'toinoulamachine';
 
 }
 

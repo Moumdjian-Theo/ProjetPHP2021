@@ -71,9 +71,8 @@ session_start();
                 {
                     $id = $_GET['id'];
                     $_SESSION['user']->deleteUser($id);
-
+                    $_SESSION['popup'] = new PopUp('success', 'utilisateur supprimé.');
                     header('location: /admin');
-
                     exit;
                 }
                 else 
@@ -113,9 +112,7 @@ session_start();
                         {
                             $_SESSION['user']->editRole($id,$role);
                             $_SESSION['popup'] = new PopUp('success', 'Role mis à jour.');
-
                             header('location: /admin');
-
                             exit;
                         }
                     }
@@ -145,44 +142,55 @@ session_start();
         if(isset($_SESSION['user']))
         {
             if($_SESSION['user']->getRole() == 2)
+            {
 
                 if(!empty($_POST['nbrlove']) && isset($_POST['nbrlove']))
                 {
-                    if(isset($_GET['id']))
+                    if(!empty($_POST['body']) && isset($_POST['body']))
                     {
-                        Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']);
-                        $_SESSION['popup'] = new PopUp('success', 'nombres de loves modifiés .');
-
-                        header('location: /admin');
-
-                        exit();
+                        if(!empty($_POST['title']) && isset($_POST['title']))
+                        {
+                            if(isset($_GET['id']))
+                            {
+                                $title = $_POST['title'];
+                                $text = $_POST['body'];
+                                $id = $_GET['id'];
+                                Post::updateBody($id,$text);
+                                Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']);
+                                Post::updateTitle($id,$title);
+                                $_SESSION['popup'] = new PopUp('success', 'Changements effectués.');
+                                header('location: /admin');
+                                exit();
+                            }
+                            else 
+                            {
+                                header('location: /admin');
+                                exit();
+                            }
+                        }
+                        else
+                        {
+                            $text = $_POST['body'];
+                            $id = $_GET['id'];
+                            Post::updateBody($id,$text);
+                            Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']); 
+                            $_SESSION['popup'] = new PopUp('success', 'Changements effectués.');
+                            header('location: /admin');
+                            exit();
+                        }
                     }
-                    else 
+                    else
                     {
+                        Post::updateLoveLimit($_GET['id'],$_POST['nbrlove']); 
+                        $_SESSION['popup'] = new PopUp('success', 'Changements effectués.');
                         header('location: /admin');
                         exit();
                     }
 
                 }
-                if(!empty($_POST['body']) && isset($_POST['body']))
-                {
-                    if(isset($_GET['id']))
-                    {
-                        Post::updateBody($_GET['id'],$_POST['body']);
-                        $_SESSION['popup'] = new PopUp('success', 'nombres de loves modifiés .');
-                        header('location: /admin');
-                        exit();
-                    }
-                    else 
-                    {
-                        header('location: /admin');
-                        exit();
-                    }
-                }
-                {
-                    header('location: /admin');
-                    exit();
-                }
+
+            }
+            
         }
         else
         {
@@ -203,9 +211,7 @@ session_start();
                     $id_post=$_GET['id'];
                     Post::deletePost($id_post);
                     $_SESSION['popup'] = new PopUp('success', 'Poste supprimé.');
-
                     header('location: /admin');
-
                     exit;
                 }
                 else 
