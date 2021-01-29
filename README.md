@@ -3,19 +3,21 @@
 # ######################################################################
  
 
-###### ### Auteurs:
-# MOUMDJIAN Théo
-# RISCH Guillaume
-# FERTOUT Haïtam
-# LOURGUI Oussama
-## Organisation : IUT AIX MARSEILLE, IUT d’Aix en Provence, 413 Avenue Gaston Berger, 13100 Aix-en-Provence.
+#Auteurs:
+###MOUMDJIAN Théo
+###RISCH Guillaume
+###FERTOUT Haïtam
+###LOURGUI Oussama
+###Organisation : IUT AIX MARSEILLE, IUT d’Aix en Provence, 413 Avenue Gaston Berger, 13100 Aix-en-Provence.
  
 
-###### ### Identifiants :
+#Identifiants :
 ## ALWAYSDATA:
-# mail : vanestarrephps3@gmail.com
-# mdp : toinoulamachine
-
+### mail : vanestarrephps3@gmail.com
+### mdp : toinoulamachine
+## Site admin :
+### mail: theo.moumdjian@gmail.com
+### mdp : 123
 
 ###### ###  Informations Générales :
 # Réalisation du site web Vanestarre, inspiré de sites de réseaux sociaux tels que Instagram ou Twitter. Nombreuses fonctionnalités disponibles (cf. Fonctionnalités)
